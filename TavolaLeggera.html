@@ -132,10 +132,13 @@
 <header>
   <div class="header-top">
     <h1>🍽 TavolaLeggera</h1>
-    <div class="date-nav">
-      <button class="date-btn" onclick="changeDay(-1)">‹</button>
-      <div class="date-label" id="dateLabel"></div>
-      <button class="date-btn" onclick="changeDay(1)" id="nextDayBtn">›</button>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button class="date-btn" onclick="openHelp()" style="font-size:15px;font-weight:700;color:var(--amber)">?</button>
+      <div class="date-nav">
+        <button class="date-btn" onclick="changeDay(-1)">‹</button>
+        <div class="date-label" id="dateLabel"></div>
+        <button class="date-btn" onclick="changeDay(1)" id="nextDayBtn">›</button>
+      </div>
     </div>
   </div>
   <div class="garmin-row">
@@ -228,9 +231,88 @@
   </div>
 </div>
 
+<!-- MODAL AIUTO -->
+<div class="modal-overlay" id="helpOverlay" onclick="closeHelp(event)">
+  <div class="modal" style="max-height:85vh;overflow-y:auto">
+    <div class="modal-handle"></div>
+    <div style="font-size:18px;font-weight:700;color:var(--amber);margin-bottom:16px">🍽 Come usare TavolaLeggera</div>
+
+    <div style="font-size:13px;color:var(--text);line-height:1.7;display:flex;flex-direction:column;gap:14px">
+
+      <div>
+        <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">📊 I tre numeri in alto</div>
+        <div style="color:var(--text-dim)"><b style="color:var(--text)">Target</b> — quante calorie puoi assumere oggi mantenendo un deficit di 500 kcal rispetto a quelle bruciate.</div>
+        <div style="color:var(--text-dim);margin-top:4px"><b style="color:var(--text)">Assunte</b> — totale calorie aggiunte nel diario di oggi.</div>
+        <div style="color:var(--text-dim);margin-top:4px"><b style="color:var(--text)">Rimanenti</b> — quanto ti rimane prima di raggiungere il target. Diventa rosso se sforato.</div>
+      </div>
+
+      <div>
+        <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">⌚ Garmin oggi</div>
+        <div style="color:var(--text-dim)">Inserisci ogni mattina (o sera) il valore <b style="color:var(--text)">"Calorie bruciate totali"</b> che trovi nell'app Garmin Connect → sezione <b style="color:var(--text)">Calorie bruciate</b>. Include sia il metabolismo basale che l'attività fisica del giorno. Il target si aggiorna automaticamente.</div>
+      </div>
+
+      <div style="background:var(--bg3);border-radius:10px;padding:12px">
+        <div style="font-weight:700;color:var(--amber-light);margin-bottom:6px">🚶 Non hai il Garmin?</div>
+        <div style="color:var(--text-dim);margin-bottom:8px">Usa un valore fisso stimato in base al tuo stile di vita e inseriscilo ogni giorno nel campo Garmin:</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px">
+          <div style="background:var(--bg2);border-radius:8px;padding:8px">
+            <div style="color:var(--amber);font-weight:700;margin-bottom:2px">Donna</div>
+            <div style="color:var(--text-dim)">Sedentaria: <b style="color:var(--text)">1.600</b></div>
+            <div style="color:var(--text-dim)">Attiva: <b style="color:var(--text)">1.900</b></div>
+            <div style="color:var(--text-dim)">Molto attiva: <b style="color:var(--text)">2.200</b></div>
+          </div>
+          <div style="background:var(--bg2);border-radius:8px;padding:8px">
+            <div style="color:var(--amber);font-weight:700;margin-bottom:2px">Uomo</div>
+            <div style="color:var(--text-dim)">Sedentario: <b style="color:var(--text)">1.900</b></div>
+            <div style="color:var(--text-dim)">Attivo: <b style="color:var(--text)">2.200</b></div>
+            <div style="color:var(--text-dim)">Molto attivo: <b style="color:var(--text)">2.600</b></div>
+          </div>
+        </div>
+        <div style="color:var(--text-dim);font-size:11px;margin-top:8px">💡 Nei giorni di escursione o attività intensa aumenta il valore di 300-500 kcal.</div>
+      </div>
+
+      <div>
+        <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">➕ Aggiungere un alimento</div>
+        <div style="color:var(--text-dim)">Vai sul tab <b style="color:var(--text)">Aggiungi</b>, cerca l'alimento, toccalo, regola la porzione con i pulsanti rapidi o scrivila a mano, poi tocca <b style="color:var(--text)">Aggiungi</b>.</div>
+      </div>
+
+      <div>
+        <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">⭐ I miei alimenti</div>
+        <div style="color:var(--text-dim)">Puoi aggiungere qualsiasi alimento non presente nella lista inserendo nome, porzione e kcal per 100g. Li trovi poi nella ricerca con il badge <b style="color:var(--amber)">mio</b>.</div>
+      </div>
+
+      <div>
+        <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">📋 Diario e Storico</div>
+        <div style="color:var(--text-dim)">Il <b style="color:var(--text)">Diario</b> mostra tutto quello che hai mangiato oggi — puoi eliminare singole voci. Lo <b style="color:var(--text)">Storico</b> riepiloga i giorni precedenti con il deficit effettivo di ogni giornata.</div>
+      </div>
+
+      <div>
+        <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">‹ › Navigare i giorni</div>
+        <div style="color:var(--text-dim)">Le frecce accanto alla data ti permettono di tornare ai giorni precedenti per consultare o modificare il diario.</div>
+      </div>
+
+      <div style="background:var(--bg3);border-radius:10px;padding:12px;margin-top:4px">
+        <div style="font-size:11px;color:var(--text-dim);text-align:center">I dati sono salvati solo sul tuo dispositivo e non vengono condivisi.</div>
+      </div>
+
+    </div>
+
+    <button class="btn-primary" onclick="closeHelp()" style="margin-top:20px">Chiudi</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
+// ---- HELP ----
+function openHelp() {
+  document.getElementById('helpOverlay').classList.add('open');
+}
+function closeHelp(e) {
+  if (e && e.target !== document.getElementById('helpOverlay')) return;
+  document.getElementById('helpOverlay').classList.remove('open');
+}
+
 // ---- ALIMENTI BASE ----
 
 const ALIMENTI_BASE = [
