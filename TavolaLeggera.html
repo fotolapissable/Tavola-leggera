@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Calorie">
-<link rel="manifest" id="pwaManifest">
+<link rel="manifest" href="manifest.json">
 <title>TavolaLeggera</title>
 <style>
   :root {
@@ -231,24 +231,8 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ---- PWA MANIFEST (inline) ----
-const manifestData = {
-  name: "TavolaLeggera",
-  short_name: "Calorie",
-  description: "Il tuo diario alimentare leggero",
-  start_url: "./",
-  display: "standalone",
-  background_color: "#18120a",
-  theme_color: "#18120a",
-  icons: [
-    { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='32' fill='%2318120a'/%3E%3Ctext y='130' x='96' text-anchor='middle' font-size='110'%3E🍽%3C/text%3E%3C/svg%3E", sizes: "192x192", type: "image/svg+xml" },
-    { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='80' fill='%2318120a'/%3E%3Ctext y='360' x='256' text-anchor='middle' font-size='300'%3E🍽%3C/text%3E%3C/svg%3E", sizes: "512x512", type: "image/svg+xml" }
-  ]
-};
-const blob = new Blob([JSON.stringify(manifestData)], {type: 'application/json'});
-document.getElementById('pwaManifest').href = URL.createObjectURL(blob);
-
 // ---- ALIMENTI BASE ----
+
 const ALIMENTI_BASE = [
   { name: "1/2 Pollo allo spiedo (senza pelle)", porzione: 250, unit: "g", kcal100: 124 },
   { name: "Acciughe fresche", porzione: 100, unit: "g", kcal100: 130 },
