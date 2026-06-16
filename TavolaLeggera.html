@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#18120a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Calorie">
+<meta name="apple-mobile-web-app-title" content="TavolaLeggera">
 <link rel="manifest" href="manifest.json">
 <title>TavolaLeggera</title>
 <style>
@@ -48,8 +48,8 @@
   .progress-bar-fill.over { background: var(--red); }
   .progress-bar-fill.warn { background: var(--yellow); }
 
-  .tabs { display: flex; margin: 12px 16px 0; background: var(--bg2); border-radius: var(--radius); padding: 3px; gap: 2px; }
-  .tab { flex: 1; text-align: center; padding: 7px 4px; font-size: 11px; font-weight: 600; border-radius: 9px; cursor: pointer; color: var(--text-dim); transition: all 0.2s; border: none; background: none; }
+  .tabs { display: flex; margin: 12px 16px 0; background: var(--bg2); border-radius: var(--radius); padding: 3px; gap: 2px; overflow-x: auto; }
+  .tab { flex: 1; text-align: center; padding: 7px 4px; font-size: 11px; font-weight: 600; border-radius: 9px; cursor: pointer; color: var(--text-dim); transition: all 0.2s; border: none; background: none; white-space: nowrap; }
   .tab.active { background: var(--amber); color: var(--bg); }
 
   .section { display: none; padding: 12px 16px; }
@@ -97,7 +97,13 @@
   .diario-name { font-size: 14px; font-weight: 500; }
   .diario-porzione { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
   .diario-kcal { font-size: 16px; font-weight: 700; color: var(--amber); }
-  .diario-del { background: none; border: none; color: var(--text-dim); font-size: 20px; padding: 4px 8px; cursor: pointer; margin-left: 8px; }
+  .diario-del { background: none; border: none; color: var(--text-dim); font-size: 20px; padding: 4px 8px; cursor: pointer; margin-left: 4px; }
+  .diario-edit { background: none; border: none; color: var(--text-dim); font-size: 16px; padding: 4px 6px; cursor: pointer; }
+
+  .note-wrap { margin-top: 12px; }
+  .note-input { width: 100%; background: var(--bg2); border: 1px solid var(--bg3); border-radius: var(--radius); color: var(--text); font-size: 14px; padding: 10px 12px; outline: none; resize: none; min-height: 60px; transition: border-color 0.2s; font-family: var(--font); }
+  .note-input:focus { border-color: var(--amber); }
+  .note-label { font-size: 11px; color: var(--text-dim); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
 
   /* STORICO */
   .storico-list { display: flex; flex-direction: column; gap: 8px; }
@@ -106,6 +112,35 @@
   .storico-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
   .storico-row span:first-child { color: var(--text-dim); }
   .storico-bilancio { font-weight: 700; }
+  .storico-note { font-size: 12px; color: var(--text-dim); margin-top: 6px; font-style: italic; border-top: 1px solid var(--bg3); padding-top: 6px; }
+
+  .export-btn { width: 100%; background: var(--bg2); border: 1px solid var(--amber-dim); border-radius: var(--radius); color: var(--amber); font-size: 13px; font-weight: 600; padding: 10px; cursor: pointer; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .export-btn:active { background: var(--bg3); }
+
+  /* GRAFICO */
+  .chart-wrap { background: var(--bg2); border-radius: var(--radius); padding: 14px; margin-bottom: 14px; }
+  .chart-title { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 70px; }
+  .chart-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+  .chart-bar { width: 100%; border-radius: 4px 4px 0 0; min-height: 2px; transition: height 0.3s; }
+  .chart-bar.ok { background: var(--green); }
+  .chart-bar.warn { background: var(--yellow); }
+  .chart-bar.over { background: var(--red); }
+  .chart-bar.empty { background: var(--bg3); }
+  .chart-day { font-size: 9px; color: var(--text-dim); margin-top: 4px; }
+  .chart-val { font-size: 9px; color: var(--text-dim); }
+
+  /* PASTI RICORRENTI */
+  .ricorrenti-section { margin-bottom: 16px; }
+  .ricorrente-item { background: var(--bg2); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 6px; }
+  .ricorrente-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .ricorrente-name { font-size: 14px; font-weight: 700; color: var(--amber); }
+  .ricorrente-actions { display: flex; gap: 4px; }
+  .ricorrente-detail { font-size: 12px; color: var(--text-dim); }
+  .ricorrente-kcal { font-size: 13px; color: var(--amber-light); font-weight: 600; margin-top: 2px; }
+  .btn-small { background: var(--bg3); border: none; border-radius: 8px; color: var(--text-dim); font-size: 12px; padding: 5px 10px; cursor: pointer; }
+  .btn-small.green { color: var(--green); }
+  .btn-small.red { color: var(--red); }
 
   /* AGGIUNGI ALIMENTO CUSTOM */
   .custom-form { background: var(--bg2); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; }
@@ -125,6 +160,16 @@
   .toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--amber); color: var(--bg); font-size: 14px; font-weight: 600; padding: 10px 20px; border-radius: 20px; opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 200; white-space: nowrap; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   .badge { background: var(--amber-dim); color: var(--amber); font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; margin-left: 4px; vertical-align: middle; }
+
+  /* BANNER FOTOLAPISSABLE */
+  .foto-banner { background: linear-gradient(135deg, #1a1008 0%, #2a1a0a 50%, #1a1008 100%); border: 1px solid var(--amber-dim); border-radius: var(--radius); padding: 14px 16px; margin: 16px 16px 0; display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+  .foto-banner:active { border-color: var(--amber); background: #2e1e0a; }
+  .foto-logo { font-size: 28px; line-height: 1; flex-shrink: 0; }
+  .foto-text { flex: 1; }
+  .foto-brand { font-size: 13px; font-weight: 700; color: var(--amber); letter-spacing: 0.5px; margin-bottom: 2px; }
+  .foto-tagline { font-size: 11px; color: var(--text-dim); line-height: 1.4; }
+  .foto-cta { font-size: 11px; color: var(--amber-light); font-weight: 600; margin-top: 4px; }
+  .foto-arrow { color: var(--amber-dim); font-size: 18px; flex-shrink: 0; }
 </style>
 </head>
 <body>
@@ -154,10 +199,22 @@
   <div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div></div>
 </header>
 
+<!-- BANNER FOTOLAPISSABLE -->
+<a class="foto-banner" href="https://www.fotolapissable.it" target="_blank" rel="noopener">
+  <div class="foto-logo">⚛️</div>
+  <div class="foto-text">
+    <div class="foto-brand">fotolapissable</div>
+    <div class="foto-tagline">Fine art photography · Etna · Sicilia · Natura</div>
+    <div class="foto-cta">Scopri i print →</div>
+  </div>
+  <div class="foto-arrow">›</div>
+</a>
+
 <div class="tabs">
   <button class="tab active" id="tab-btn-aggiungi" onclick="showTab('aggiungi',this)">＋ Aggiungi</button>
   <button class="tab" id="tab-btn-diario" onclick="showTab('diario',this)">📋 Diario</button>
   <button class="tab" id="tab-btn-miei" onclick="showTab('miei',this)">⭐ Miei</button>
+  <button class="tab" id="tab-btn-ricorrenti" onclick="showTab('ricorrenti',this)">🔁 Pasti</button>
   <button class="tab" id="tab-btn-storico" onclick="showTab('storico',this)">📊 Storico</button>
 </div>
 
@@ -174,6 +231,13 @@
 <!-- TAB DIARIO -->
 <div class="section" id="tab-diario">
   <div class="diario-list" id="diarioList"></div>
+  <div class="note-wrap" id="noteWrap" style="margin-top:14px">
+    <div class="note-label">📝 Note del giorno</div>
+    <textarea class="note-input" id="noteInput" placeholder="Come ti sei sentito oggi? Attività, umore, sonno..." oninput="saveNote()"></textarea>
+  </div>
+  <div style="margin-top:12px">
+    <button class="btn-small green" style="width:100%;padding:10px;font-size:13px" onclick="savePastoRicorrente()">🔁 Salva questo pasto come ricorrente</button>
+  </div>
 </div>
 
 <!-- TAB MIEI ALIMENTI -->
@@ -207,8 +271,18 @@
   <div class="alimenti-list" id="customList"></div>
 </div>
 
+<!-- TAB PASTI RICORRENTI -->
+<div class="section" id="tab-ricorrenti">
+  <div id="ricorrentiList"></div>
+</div>
+
 <!-- TAB STORICO -->
 <div class="section" id="tab-storico">
+  <button class="export-btn" onclick="exportCSV()">⬇️ Esporta storico CSV</button>
+  <div class="chart-wrap">
+    <div class="chart-title">Deficit ultimi 7 giorni</div>
+    <div class="chart-bars" id="chartBars"></div>
+  </div>
   <div class="storico-list" id="storicoList"></div>
 </div>
 
@@ -226,7 +300,23 @@
     <div class="quick-portions" id="quickPortions"></div>
     <div class="modal-actions">
       <button class="btn-secondary" onclick="closeModal()">Annulla</button>
-      <button class="btn-primary" onclick="addAlimento()">Aggiungi</button>
+      <button class="btn-primary" id="modalAddBtn" onclick="addAlimento()">Aggiungi</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL NOME PASTO RICORRENTE -->
+<div class="modal-overlay" id="ricorrenteNameOverlay" onclick="closeRicorrenteNameModal(event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">💾 Salva pasto ricorrente</div>
+    <div class="modal-sub">Dai un nome a questo pasto per riusarlo facilmente.</div>
+    <div class="form-row" style="margin-bottom:16px">
+      <input class="form-input" type="text" id="ricorrenteNameInput" placeholder="es. Colazione tipo, Pranzo leggero...">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeRicorrenteNameModal()">Annulla</button>
+      <button class="btn-primary" onclick="confirmSaveRicorrente()">Salva</button>
     </div>
   </div>
 </div>
@@ -236,67 +326,48 @@
   <div class="modal" style="max-height:85vh;overflow-y:auto">
     <div class="modal-handle"></div>
     <div style="font-size:18px;font-weight:700;color:var(--amber);margin-bottom:16px">🍽 Come usare TavolaLeggera</div>
-
     <div style="font-size:13px;color:var(--text);line-height:1.7;display:flex;flex-direction:column;gap:14px">
-
       <div>
         <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">📊 I tre numeri in alto</div>
-        <div style="color:var(--text-dim)"><b style="color:var(--text)">Target</b> — quante calorie puoi assumere oggi mantenendo un deficit di 500 kcal rispetto a quelle bruciate.</div>
-        <div style="color:var(--text-dim);margin-top:4px"><b style="color:var(--text)">Assunte</b> — totale calorie aggiunte nel diario di oggi.</div>
-        <div style="color:var(--text-dim);margin-top:4px"><b style="color:var(--text)">Rimanenti</b> — quanto ti rimane prima di raggiungere il target. Diventa rosso se sforato.</div>
+        <div style="color:var(--text-dim)"><b style="color:var(--text)">Target</b> — quante calorie puoi assumere mantenendo un deficit di 500 kcal.</div>
+        <div style="color:var(--text-dim);margin-top:4px"><b style="color:var(--text)">Assunte</b> — totale calorie aggiunte nel diario.</div>
+        <div style="color:var(--text-dim);margin-top:4px"><b style="color:var(--text)">Rimanenti</b> — quanto ti rimane. Diventa rosso se sforato.</div>
       </div>
-
       <div>
         <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">⌚ Garmin oggi</div>
-        <div style="color:var(--text-dim)">Inserisci ogni mattina (o sera) il valore <b style="color:var(--text)">"Calorie bruciate totali"</b> che trovi nell'app Garmin Connect → sezione <b style="color:var(--text)">Calorie bruciate</b>. Include sia il metabolismo basale che l'attività fisica del giorno. Il target si aggiorna automaticamente.</div>
+        <div style="color:var(--text-dim)">Inserisci ogni mattina le <b style="color:var(--text)">Calorie bruciate totali</b> da Garmin Connect.</div>
       </div>
-
       <div style="background:var(--bg3);border-radius:10px;padding:12px">
-        <div style="font-weight:700;color:var(--amber-light);margin-bottom:6px">🚶 Non hai il Garmin?</div>
-        <div style="color:var(--text-dim);margin-bottom:8px">Usa un valore fisso stimato in base al tuo stile di vita e inseriscilo ogni giorno nel campo Garmin:</div>
+        <div style="font-weight:700;color:var(--amber-light);margin-bottom:6px">🚶 Senza Garmin?</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px">
           <div style="background:var(--bg2);border-radius:8px;padding:8px">
             <div style="color:var(--amber);font-weight:700;margin-bottom:2px">Donna</div>
             <div style="color:var(--text-dim)">Sedentaria: <b style="color:var(--text)">1.600</b></div>
             <div style="color:var(--text-dim)">Attiva: <b style="color:var(--text)">1.900</b></div>
-            <div style="color:var(--text-dim)">Molto attiva: <b style="color:var(--text)">2.200</b></div>
           </div>
           <div style="background:var(--bg2);border-radius:8px;padding:8px">
             <div style="color:var(--amber);font-weight:700;margin-bottom:2px">Uomo</div>
             <div style="color:var(--text-dim)">Sedentario: <b style="color:var(--text)">1.900</b></div>
             <div style="color:var(--text-dim)">Attivo: <b style="color:var(--text)">2.200</b></div>
-            <div style="color:var(--text-dim)">Molto attivo: <b style="color:var(--text)">2.600</b></div>
           </div>
         </div>
-        <div style="color:var(--text-dim);font-size:11px;margin-top:8px">💡 Nei giorni di escursione o attività intensa aumenta il valore di 300-500 kcal.</div>
       </div>
-
       <div>
-        <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">➕ Aggiungere un alimento</div>
-        <div style="color:var(--text-dim)">Vai sul tab <b style="color:var(--text)">Aggiungi</b>, cerca l'alimento, toccalo, regola la porzione con i pulsanti rapidi o scrivila a mano, poi tocca <b style="color:var(--text)">Aggiungi</b>.</div>
+        <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">🔁 Pasti ricorrenti</div>
+        <div style="color:var(--text-dim)">Dal tab <b style="color:var(--text)">Diario</b>, dopo aver aggiunto gli alimenti, tocca <b style="color:var(--text)">"Salva come ricorrente"</b> per memorizzare il pasto. Dal tab <b style="color:var(--text)">Pasti</b> puoi ricaricarlo in un click.</div>
       </div>
-
       <div>
-        <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">⭐ I miei alimenti</div>
-        <div style="color:var(--text-dim)">Puoi aggiungere qualsiasi alimento non presente nella lista inserendo nome, porzione e kcal per 100g. Li trovi poi nella ricerca con il badge <b style="color:var(--amber)">mio</b>.</div>
+        <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">✏️ Modifica porzione</div>
+        <div style="color:var(--text-dim)">Nel Diario, tocca l'icona ✏️ accanto a un alimento per modificarne la porzione senza doverlo eliminare e reinserire.</div>
       </div>
-
       <div>
-        <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">📋 Diario e Storico</div>
-        <div style="color:var(--text-dim)">Il <b style="color:var(--text)">Diario</b> mostra tutto quello che hai mangiato oggi — puoi eliminare singole voci. Lo <b style="color:var(--text)">Storico</b> riepiloga i giorni precedenti con il deficit effettivo di ogni giornata.</div>
+        <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">📊 Storico ed export</div>
+        <div style="color:var(--text-dim)">Nel tab Storico trovi il grafico degli ultimi 7 giorni e puoi esportare tutto in CSV.</div>
       </div>
-
-      <div>
-        <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">‹ › Navigare i giorni</div>
-        <div style="color:var(--text-dim)">Le frecce accanto alla data ti permettono di tornare ai giorni precedenti per consultare o modificare il diario.</div>
-      </div>
-
       <div style="background:var(--bg3);border-radius:10px;padding:12px;margin-top:4px">
-        <div style="font-size:11px;color:var(--text-dim);text-align:center">I dati sono salvati solo sul tuo dispositivo e non vengono condivisi.</div>
+        <div style="font-size:11px;color:var(--text-dim);text-align:center">I dati sono salvati solo sul tuo dispositivo.</div>
       </div>
-
     </div>
-
     <button class="btn-primary" onclick="closeHelp()" style="margin-top:20px">Chiudi</button>
   </div>
 </div>
@@ -305,57 +376,78 @@
 
 <script>
 // ---- HELP ----
-function openHelp() {
-  document.getElementById('helpOverlay').classList.add('open');
-}
+function openHelp() { document.getElementById('helpOverlay').classList.add('open'); }
 function closeHelp(e) {
   if (e && e.target !== document.getElementById('helpOverlay')) return;
   document.getElementById('helpOverlay').classList.remove('open');
 }
 
 // ---- ALIMENTI BASE ----
-
 const ALIMENTI_BASE = [
   { name: "1/2 Pollo allo spiedo (senza pelle)", porzione: 250, unit: "g", kcal100: 124 },
   { name: "Acciughe fresche", porzione: 100, unit: "g", kcal100: 130 },
   { name: "Arancino al ragù", porzione: 200, unit: "g", kcal100: 200 },
   { name: "Arancia", porzione: 150, unit: "g", kcal100: 47 },
   { name: "Birra (330ml)", porzione: 330, unit: "ml", kcal100: 42 },
+  { name: "Biscotti frollini", porzione: 30, unit: "g", kcal100: 460 },
+  { name: "Branzino (spigola) selvaggio", porzione: 150, unit: "g", kcal100: 82 },
   { name: "Caffè espresso (bar)", porzione: 30, unit: "ml", kcal100: 17 },
   { name: "Calamaro", porzione: 150, unit: "g", kcal100: 73 },
   { name: "Caponata", porzione: 150, unit: "g", kcal100: 120 },
+  { name: "Carota cruda", porzione: 100, unit: "g", kcal100: 41 },
   { name: "Cavolo cappuccio in insalata", porzione: 100, unit: "g", kcal100: 28 },
+  { name: "Cipolla cruda", porzione: 50, unit: "g", kcal100: 40 },
   { name: "Costata di bovino", porzione: 200, unit: "g", kcal100: 225 },
   { name: "Costata fiorentina", porzione: 400, unit: "g", kcal100: 225 },
   { name: "Cozze con guscio", porzione: 200, unit: "g", kcal100: 43 },
   { name: "Fagiolini/zucchine (cotti)", porzione: 150, unit: "g", kcal100: 33 },
+  { name: "Fichi d'India (senza buccia)", porzione: 120, unit: "g", kcal100: 55 },
   { name: "Filetto di merluzzo (congelato)", porzione: 150, unit: "g", kcal100: 73 },
+  { name: "Finocchio crudo", porzione: 100, unit: "g", kcal100: 24 },
+  { name: "Fragole", porzione: 150, unit: "g", kcal100: 32 },
+  { name: "Gamberi sgusciati", porzione: 150, unit: "g", kcal100: 85 },
   { name: "Grana grattugiato", porzione: 10, unit: "g", kcal100: 400 },
+  { name: "Granita di mandorla (bar)", porzione: 200, unit: "g", kcal100: 160 },
   { name: "Insalata mista (condita)", porzione: 100, unit: "g", kcal100: 60 },
+  { name: "Latte scremato", porzione: 200, unit: "ml", kcal100: 34 },
   { name: "Limone (succo)", porzione: 30, unit: "ml", kcal100: 27 },
+  { name: "Macedonia di frutta (senza zucchero)", porzione: 200, unit: "g", kcal100: 45 },
+  { name: "Mandorle", porzione: 30, unit: "g", kcal100: 580 },
+  { name: "Melanzana alla griglia", porzione: 150, unit: "g", kcal100: 55 },
   { name: "Melanzana fritta (olio semi)", porzione: 100, unit: "g", kcal100: 200 },
   { name: "Mortadella Bologna", porzione: 50, unit: "g", kcal100: 290 },
+  { name: "Musu e Piedi (gelatina bovina)", porzione: 100, unit: "g", kcal100: 160 },
+  { name: "Noci (gherigli)", porzione: 30, unit: "g", kcal100: 654 },
   { name: "Olio d'oliva (1 cucchiaio)", porzione: 10, unit: "g", kcal100: 900 },
+  { name: "Olive nere (denocciolate)", porzione: 30, unit: "g", kcal100: 115 },
+  { name: "Olive verdi (denocciolate)", porzione: 30, unit: "g", kcal100: 100 },
   { name: "Pangrattato", porzione: 10, unit: "g", kcal100: 380 },
   { name: "Pane di semola bianco", porzione: 50, unit: "g", kcal100: 270 },
   { name: "Pane di semola rimacinata", porzione: 50, unit: "g", kcal100: 260 },
   { name: "Parmigiana di melanzane", porzione: 250, unit: "g", kcal100: 140 },
   { name: "Pasta (cruda)", porzione: 80, unit: "g", kcal100: 350 },
   { name: "Pasta alla Norma", porzione: 350, unit: "g", kcal100: 157 },
+  { name: "Pasta con le sarde", porzione: 350, unit: "g", kcal100: 148 },
   { name: "Pesca", porzione: 150, unit: "g", kcal100: 40 },
   { name: "Pecorino stagionato", porzione: 30, unit: "g", kcal100: 400 },
+  { name: "Peperone crudo", porzione: 100, unit: "g", kcal100: 31 },
   { name: "Pesce spada", porzione: 150, unit: "g", kcal100: 120 },
+  { name: "Pesce spada alla griglia", porzione: 150, unit: "g", kcal100: 140 },
   { name: "Petto di pollo impanato", porzione: 150, unit: "g", kcal100: 200 },
   { name: "Pizza margherita grande", porzione: 400, unit: "g", kcal100: 250 },
   { name: "Pizzetta da bar (pomodoro, formaggio, olive)", porzione: 100, unit: "g", kcal100: 280 },
   { name: "Polipo", porzione: 150, unit: "g", kcal100: 73 },
+  { name: "Pomodori secchi sott'olio", porzione: 30, unit: "g", kcal100: 258 },
+  { name: "Pomodoro fresco", porzione: 150, unit: "g", kcal100: 18 },
   { name: "Pomodoro tritato (salsa)", porzione: 100, unit: "g", kcal100: 25 },
   { name: "Prosciutto San Daniele", porzione: 50, unit: "g", kcal100: 260 },
   { name: "Provolone dolce", porzione: 30, unit: "g", kcal100: 350 },
   { name: "Ricotta al forno (grattugiata)", porzione: 30, unit: "g", kcal100: 300 },
-  { name: "Ricotta fresca", porzione: 50, unit: "g", kcal100: 150 },
+  { name: "Ricotta fresca di pecora", porzione: 100, unit: "g", kcal100: 157 },
+  { name: "Riso (cotto)", porzione: 180, unit: "g", kcal100: 138 },
   { name: "Salsiccia di maiale", porzione: 100, unit: "g", kcal100: 330 },
   { name: "Sarde fresche", porzione: 100, unit: "g", kcal100: 135 },
+  { name: "Sgombro fresco", porzione: 150, unit: "g", kcal100: 170 },
   { name: "Soffritto (olio+aglio+cipolla)", porzione: 15, unit: "g", kcal100: 600 },
   { name: "Spaghetti alla carbonara (solo tuorlo)", porzione: 350, unit: "g", kcal100: 171 },
   { name: "Spigola d'allevamento", porzione: 150, unit: "g", kcal100: 100 },
@@ -366,14 +458,18 @@ const ALIMENTI_BASE = [
   { name: "Tritato di suino", porzione: 100, unit: "g", kcal100: 280 },
   { name: "Trunzu d'aci in insalata", porzione: 100, unit: "g", kcal100: 25 },
   { name: "Uova alla coque (1 uovo)", porzione: 50, unit: "g", kcal100: 140 },
+  { name: "Uova strapazzate (2 uova + olio)", porzione: 120, unit: "g", kcal100: 175 },
   { name: "Vino bianco 11.5° (200ml)", porzione: 200, unit: "ml", kcal100: 79 },
   { name: "Vino rosso 13° (200ml)", porzione: 200, unit: "ml", kcal100: 85 },
   { name: "Vongole con guscio", porzione: 200, unit: "g", kcal100: 45 },
+  { name: "Yogurt greco 0%", porzione: 150, unit: "g", kcal100: 57 },
+  { name: "Zucchina cruda", porzione: 150, unit: "g", kcal100: 17 },
 ];
 
 const DEFICIT_TARGET = 500;
 let currentDay = todayKey();
 let selectedAlimento = null;
+let editingDiarioIdx = null;
 
 function todayKey() { return new Date().toISOString().slice(0,10); }
 
@@ -397,8 +493,8 @@ function changeDay(dir) {
 
 // ---- STORAGE ----
 function getDayData(key) {
-  try { return JSON.parse(localStorage.getItem('calorie_' + key) || '{"garmin":2152,"pasti":[]}'); }
-  catch { return { garmin: 2152, pasti: [] }; }
+  try { return JSON.parse(localStorage.getItem('calorie_' + key) || '{"garmin":2152,"pasti":[],"note":""}'); }
+  catch { return { garmin: 2152, pasti: [], note: '' }; }
 }
 function saveDayData(key, data) { localStorage.setItem('calorie_' + key, JSON.stringify(data)); }
 
@@ -407,6 +503,12 @@ function getCustomAlimenti() {
   catch { return []; }
 }
 function saveCustomAlimenti(list) { localStorage.setItem('calorie_custom_alimenti', JSON.stringify(list)); }
+
+function getPastiRicorrenti() {
+  try { return JSON.parse(localStorage.getItem('calorie_ricorrenti') || '[]'); }
+  catch { return []; }
+}
+function savePastiRicorrenti(list) { localStorage.setItem('calorie_ricorrenti', JSON.stringify(list)); }
 
 function getAllAlimenti() {
   const custom = getCustomAlimenti().map(a => ({ ...a, custom: true }));
@@ -418,6 +520,7 @@ function render() {
   document.getElementById('dateLabel').textContent = dateLabel(currentDay);
   const data = getDayData(currentDay);
   document.getElementById('garminInput').value = data.garmin || 2152;
+  document.getElementById('noteInput').value = data.note || '';
   updateBilancio(data);
   renderAlimentiList();
   renderDiario(data);
@@ -429,6 +532,12 @@ function saveGarmin() {
   data.garmin = parseInt(document.getElementById('garminInput').value) || 2152;
   saveDayData(currentDay, data);
   updateBilancio(data);
+}
+
+function saveNote() {
+  const data = getDayData(currentDay);
+  data.note = document.getElementById('noteInput').value;
+  saveDayData(currentDay, data);
 }
 
 function updateBilancio(data) {
@@ -473,46 +582,30 @@ function renderAlimentiList(filter = '') {
 
 function renderDiario(data) {
   const list = document.getElementById('diarioList');
-  if (!data.pasti.length) { list.innerHTML = `<div class="empty-state"><div class="empty-icon">🍽</div>Nessun alimento aggiunto oggi</div>`; return; }
+  if (!data.pasti.length) {
+    list.innerHTML = `<div class="empty-state"><div class="empty-icon">🍽</div>Nessun alimento aggiunto oggi</div>`;
+    return;
+  }
   list.innerHTML = data.pasti.map((p,i) => `
     <div class="diario-item">
-      <div style="flex:1"><div class="diario-name">${p.name}</div><div class="diario-porzione">${p.porzione}${p.unit}</div></div>
+      <div style="flex:1">
+        <div class="diario-name">${p.name}</div>
+        <div class="diario-porzione">${p.porzione}${p.unit}</div>
+      </div>
       <div class="diario-kcal">${Math.round(p.kcal)} kcal</div>
+      <button class="diario-edit" onclick="editAlimento(${i})" title="Modifica porzione">✏️</button>
       <button class="diario-del" onclick="removeAlimento(${i})">✕</button>
     </div>`).join('');
-}
-
-function renderStorico() {
-  const list = document.getElementById('storicoList');
-  const keys = [];
-  for (let i=0; i<localStorage.length; i++) {
-    const k = localStorage.key(i);
-    if (k.startsWith('calorie_') && !k.includes('custom')) keys.push(k.replace('calorie_',''));
-  }
-  keys.sort().reverse();
-  if (!keys.length) { list.innerHTML = `<div class="empty-state"><div class="empty-icon">📊</div>Nessuno storico ancora</div>`; return; }
-  list.innerHTML = keys.map(k => {
-    const d = getDayData(k);
-    const assunte = Math.round(d.pasti.reduce((s,p)=>s+p.kcal,0));
-    const garmin = d.garmin || 2152;
-    const target = garmin - DEFICIT_TARGET;
-    const bilancio = garmin - assunte;
-    const col = assunte > target ? '#d96a5a' : assunte > target-200 ? '#e8c56a' : '#6db87a';
-    return `<div class="storico-item">
-      <div class="storico-date">${dateLabel(k)} · ${k}</div>
-      <div class="storico-row"><span>Garmin</span><span>${garmin} kcal</span></div>
-      <div class="storico-row"><span>Assunte</span><span>${assunte} kcal</span></div>
-      <div class="storico-row"><span>Target</span><span>${target} kcal</span></div>
-      <div class="storico-row"><span>Deficit effettivo</span><span class="storico-bilancio" style="color:${col}">${bilancio} kcal</span></div>
-    </div>`;
-  }).join('');
 }
 
 function renderCustomList() {
   const customs = getCustomAlimenti();
   document.getElementById('customCount').textContent = customs.length ? `(${customs.length})` : '';
   const list = document.getElementById('customList');
-  if (!customs.length) { list.innerHTML = `<div class="empty-state"><div class="empty-icon">⭐</div>Nessun alimento personalizzato ancora</div>`; return; }
+  if (!customs.length) {
+    list.innerHTML = `<div class="empty-state"><div class="empty-icon">⭐</div>Nessun alimento personalizzato ancora</div>`;
+    return;
+  }
   list.innerHTML = customs.map((a,i) => {
     const kcalP = Math.round(a.porzione / 100 * a.kcal100);
     return `<div class="alimento-item custom-item">
@@ -525,6 +618,82 @@ function renderCustomList() {
         <div class="alimento-kcal-unit">kcal</div>
       </div>
       <button class="alimento-del" onclick="deleteCustomAlimento(${i})">🗑</button>
+    </div>`;
+  }).join('');
+}
+
+function renderStorico() {
+  const list = document.getElementById('storicoList');
+  const keys = [];
+  for (let i=0; i<localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k.startsWith('calorie_') && !k.includes('custom') && !k.includes('ricorrenti')) keys.push(k.replace('calorie_',''));
+  }
+  keys.sort().reverse();
+  renderChart(keys);
+  if (!keys.length) { list.innerHTML = `<div class="empty-state"><div class="empty-icon">📊</div>Nessuno storico ancora</div>`; return; }
+  list.innerHTML = keys.map(k => {
+    const d = getDayData(k);
+    const assunte = Math.round(d.pasti.reduce((s,p)=>s+p.kcal,0));
+    const garmin = d.garmin || 2152;
+    const target = garmin - DEFICIT_TARGET;
+    const bilancio = garmin - assunte;
+    const col = assunte > target ? '#d96a5a' : assunte > target-200 ? '#e8c56a' : '#6db87a';
+    const noteHtml = d.note ? `<div class="storico-note">📝 ${d.note}</div>` : '';
+    return `<div class="storico-item">
+      <div class="storico-date">${dateLabel(k)} · ${k}</div>
+      <div class="storico-row"><span>Garmin</span><span>${garmin} kcal</span></div>
+      <div class="storico-row"><span>Assunte</span><span>${assunte} kcal</span></div>
+      <div class="storico-row"><span>Target</span><span>${target} kcal</span></div>
+      <div class="storico-row"><span>Deficit effettivo</span><span class="storico-bilancio" style="color:${col}">${bilancio} kcal</span></div>
+      ${noteHtml}
+    </div>`;
+  }).join('');
+}
+
+function renderChart(keys) {
+  const wrap = document.getElementById('chartBars');
+  const last7 = keys.slice(0, 7).reverse();
+  if (!last7.length) { wrap.innerHTML = '<div style="color:var(--text-dim);font-size:12px;text-align:center;width:100%">Dati insufficienti</div>'; return; }
+  const deficits = last7.map(k => {
+    const d = getDayData(k);
+    const assunte = Math.round(d.pasti.reduce((s,p)=>s+p.kcal,0));
+    const garmin = d.garmin || 2152;
+    return { key: k, val: garmin - assunte, assunte, target: garmin - DEFICIT_TARGET };
+  });
+  const maxVal = Math.max(...deficits.map(d => Math.abs(d.val)), 1);
+  wrap.innerHTML = deficits.map(d => {
+    const pct = Math.min(Math.abs(d.val) / maxVal * 100, 100);
+    const cls = d.assunte > d.target ? 'over' : d.assunte > d.target - 200 ? 'warn' : 'ok';
+    const dayLabel = new Date(d.key + 'T12:00:00').toLocaleDateString('it-IT', { weekday: 'short' });
+    return `<div class="chart-bar-wrap">
+      <div style="font-size:9px;color:var(--text-dim);text-align:center">${d.val > 0 ? '+' : ''}${d.val}</div>
+      <div class="chart-bar ${cls}" style="height:${pct}%"></div>
+      <div class="chart-day">${dayLabel}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderRicorrenti() {
+  const list = document.getElementById('ricorrentiList');
+  const ricorrenti = getPastiRicorrenti();
+  if (!ricorrenti.length) {
+    list.innerHTML = `<div class="empty-state"><div class="empty-icon">🔁</div>Nessun pasto salvato ancora.<br><br>Aggiungilo dal tab <b>Diario</b>.</div>`;
+    return;
+  }
+  list.innerHTML = ricorrenti.map((r, i) => {
+    const totKcal = Math.round(r.pasti.reduce((s,p)=>s+p.kcal,0));
+    const dettaglio = r.pasti.map(p=>`${p.name} (${p.porzione}${p.unit})`).join(', ');
+    return `<div class="ricorrente-item">
+      <div class="ricorrente-header">
+        <div class="ricorrente-name">${r.name}</div>
+        <div class="ricorrente-actions">
+          <button class="btn-small green" onclick="caricaRicorrente(${i})">+ Aggiungi</button>
+          <button class="btn-small red" onclick="deleteRicorrente(${i})">🗑</button>
+        </div>
+      </div>
+      <div class="ricorrente-detail">${dettaglio}</div>
+      <div class="ricorrente-kcal">Totale: ${totKcal} kcal</div>
     </div>`;
   }).join('');
 }
@@ -558,18 +727,84 @@ function deleteCustomAlimento(idx) {
   showToast(`"${name}" eliminato`);
 }
 
+// ---- PASTI RICORRENTI ----
+function savePastoRicorrente() {
+  const data = getDayData(currentDay);
+  if (!data.pasti.length) { showToast('Aggiungi prima degli alimenti'); return; }
+  document.getElementById('ricorrenteNameInput').value = '';
+  document.getElementById('ricorrenteNameOverlay').classList.add('open');
+  setTimeout(() => document.getElementById('ricorrenteNameInput').focus(), 200);
+}
+
+function closeRicorrenteNameModal(e) {
+  if (e && e.target !== document.getElementById('ricorrenteNameOverlay')) return;
+  document.getElementById('ricorrenteNameOverlay').classList.remove('open');
+}
+
+function confirmSaveRicorrente() {
+  const name = document.getElementById('ricorrenteNameInput').value.trim();
+  if (!name) { showToast('Inserisci un nome'); return; }
+  const data = getDayData(currentDay);
+  const ricorrenti = getPastiRicorrenti();
+  ricorrenti.unshift({ name, pasti: data.pasti });
+  savePastiRicorrenti(ricorrenti);
+  document.getElementById('ricorrenteNameOverlay').classList.remove('open');
+  showToast(`"${name}" salvato!`);
+}
+
+function caricaRicorrente(idx) {
+  const ricorrenti = getPastiRicorrenti();
+  const r = ricorrenti[idx];
+  const data = getDayData(currentDay);
+  data.pasti = [...data.pasti, ...r.pasti];
+  saveDayData(currentDay, data);
+  updateBilancio(data);
+  renderDiario(data);
+  showToast(`"${r.name}" aggiunto!`);
+  showTab('diario', document.getElementById('tab-btn-diario'));
+}
+
+function deleteRicorrente(idx) {
+  const ricorrenti = getPastiRicorrenti();
+  const name = ricorrenti[idx].name;
+  ricorrenti.splice(idx, 1);
+  savePastiRicorrenti(ricorrenti);
+  renderRicorrenti();
+  showToast(`"${name}" eliminato`);
+}
+
 // ---- MODAL ----
 let _allAlimenti = [];
 function openModal(idx, allList) {
   _allAlimenti = allList || getAllAlimenti();
   selectedAlimento = _allAlimenti[idx];
+  editingDiarioIdx = null;
   document.getElementById('modalTitle').textContent = selectedAlimento.name;
   document.getElementById('modalSub').textContent = `${Math.round(selectedAlimento.porzione/100*selectedAlimento.kcal100)} kcal per porzione tipica (${selectedAlimento.porzione}${selectedAlimento.unit})`;
   document.getElementById('porzioneInput').value = selectedAlimento.porzione;
   document.getElementById('porzioneUnit').textContent = selectedAlimento.unit;
+  document.getElementById('modalAddBtn').textContent = 'Aggiungi';
   const tipica = selectedAlimento.porzione;
   const quicks = [Math.round(tipica*0.5), tipica, Math.round(tipica*1.5), Math.round(tipica*2)].filter((v,i,a)=>a.indexOf(v)===i);
   document.getElementById('quickPortions').innerHTML = quicks.map(q => `<button class="quick-btn" onclick="setQty(${q})">${q}${selectedAlimento.unit}</button>`).join('');
+  updatePreview();
+  document.getElementById('modalOverlay').classList.add('open');
+  setTimeout(() => document.getElementById('porzioneInput').select(), 100);
+}
+
+function editAlimento(idx) {
+  const data = getDayData(currentDay);
+  const p = data.pasti[idx];
+  editingDiarioIdx = idx;
+  selectedAlimento = { name: p.name, porzione: p.porzione, unit: p.unit, kcal100: p.kcal / p.porzione * 100 };
+  document.getElementById('modalTitle').textContent = p.name;
+  document.getElementById('modalSub').textContent = `Modifica la porzione`;
+  document.getElementById('porzioneInput').value = p.porzione;
+  document.getElementById('porzioneUnit').textContent = p.unit;
+  document.getElementById('modalAddBtn').textContent = 'Aggiorna';
+  const tipica = p.porzione;
+  const quicks = [Math.round(tipica*0.5), tipica, Math.round(tipica*1.5), Math.round(tipica*2)].filter((v,i,a)=>a.indexOf(v)===i);
+  document.getElementById('quickPortions').innerHTML = quicks.map(q => `<button class="quick-btn" onclick="setQty(${q})">${q}${p.unit}</button>`).join('');
   updatePreview();
   document.getElementById('modalOverlay').classList.add('open');
   setTimeout(() => document.getElementById('porzioneInput').select(), 100);
@@ -587,19 +822,26 @@ function closeModal(e) {
   if (e && e.target !== document.getElementById('modalOverlay')) return;
   document.getElementById('modalOverlay').classList.remove('open');
   selectedAlimento = null;
+  editingDiarioIdx = null;
 }
 
 function addAlimento() {
   const qty = parseFloat(document.getElementById('porzioneInput').value);
   if (!selectedAlimento || !qty || qty<=0) return;
   const data = getDayData(currentDay);
-  data.pasti.push({ name: selectedAlimento.name, porzione: qty, unit: selectedAlimento.unit, kcal: qty/100*selectedAlimento.kcal100 });
+  if (editingDiarioIdx !== null) {
+    data.pasti[editingDiarioIdx].porzione = qty;
+    data.pasti[editingDiarioIdx].kcal = qty / 100 * selectedAlimento.kcal100;
+  } else {
+    data.pasti.push({ name: selectedAlimento.name, porzione: qty, unit: selectedAlimento.unit, kcal: qty/100*selectedAlimento.kcal100 });
+  }
   saveDayData(currentDay, data);
   document.getElementById('modalOverlay').classList.remove('open');
   selectedAlimento = null;
+  editingDiarioIdx = null;
   updateBilancio(data);
   renderDiario(data);
-  showToast('Aggiunto!');
+  showToast(editingDiarioIdx !== null ? 'Aggiornato!' : 'Aggiunto!');
 }
 
 function removeAlimento(idx) {
@@ -608,6 +850,34 @@ function removeAlimento(idx) {
   saveDayData(currentDay, data);
   updateBilancio(data);
   renderDiario(data);
+}
+
+// ---- EXPORT CSV ----
+function exportCSV() {
+  const keys = [];
+  for (let i=0; i<localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k.startsWith('calorie_') && !k.includes('custom') && !k.includes('ricorrenti')) keys.push(k.replace('calorie_',''));
+  }
+  keys.sort();
+  if (!keys.length) { showToast('Nessun dato da esportare'); return; }
+  let csv = 'Data,Garmin kcal,Assunte kcal,Target kcal,Deficit effettivo,Note\n';
+  keys.forEach(k => {
+    const d = getDayData(k);
+    const assunte = Math.round(d.pasti.reduce((s,p)=>s+p.kcal,0));
+    const garmin = d.garmin || 2152;
+    const target = garmin - DEFICIT_TARGET;
+    const bilancio = garmin - assunte;
+    const note = (d.note || '').replace(/"/g, '""');
+    csv += `${k},${garmin},${assunte},${target},${bilancio},"${note}"\n`;
+  });
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'TavolaLeggera_storico.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('CSV esportato!');
 }
 
 // ---- SEARCH ----
@@ -627,9 +897,11 @@ function showTab(name, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
+  else document.getElementById('tab-btn-' + name).classList.add('active');
   if (name === 'storico') renderStorico();
   if (name === 'miei') renderCustomList();
+  if (name === 'ricorrenti') renderRicorrenti();
 }
 
 // ---- TOAST ----
