@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TavolaLeggera — Guida Macro & Target</title>
+<style>
+  :root {
+    --bg: #18120a;
+    --bg2: #231a10;
+    --bg3: #2e2016;
+    --amber: #C8813A;
+    --amber-light: #e09a55;
+    --text: #f0e6d8;
+    --text-dim: #9a8878;
+    --green: #6db87a;
+    --red: #d96a5a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  header {
+    background: var(--bg2);
+    border: 1px solid var(--bg3);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  h1 {
+    font-size: 32px;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+  h2 {
+    font-size: 20px;
+    color: var(--amber);
+    margin-top: 40px;
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--amber-dim);
+    padding-bottom: 8px;
+  }
+  h3 {
+    font-size: 16px;
+    color: var(--amber-light);
+    margin-top: 20px;
+    margin-bottom: 12px;
+  }
+  p {
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  .section {
+    background: var(--bg2);
+    border: 1px solid var(--bg3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    background: var(--bg3);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--bg2);
+  }
+  th {
+    background: var(--bg2);
+    color: var(--amber);
+    font-weight: 700;
+  }
+  td {
+    color: var(--text);
+  }
+  tr:last-child td {
+    border-bottom: none;
+  }
+  .highlight {
+    background: var(--bg3);
+    border-left: 4px solid var(--amber);
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 4px;
+  }
+  .example {
+    background: var(--bg3);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 12px 0;
+    font-size: 13px;
+    font-family: 'Courier New', monospace;
+    color: var(--amber-light);
+    border-left: 4px solid var(--green);
+  }
+  .disclaimer {
+    background: var(--bg3);
+    border-left: 4px solid var(--red);
+    padding: 16px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+  .disclaimer-title {
+    color: var(--red);
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  .disclaimer p {
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--amber-dim);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    color: var(--amber);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .card-content {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+  ul, ol {
+    margin: 12px 0 12px 24px;
+    color: var(--text);
+  }
+  li {
+    margin-bottom: 8px;
+  }
+  strong {
+    color: var(--amber-light);
+  }
+  .macro-icon {
+    font-size: 24px;
+    margin-right: 8px;
+  }
+  .footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--bg3);
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .btn {
+    background: var(--amber);
+    color: var(--bg);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+  }
+  .btn:hover {
+    background: var(--amber-light);
+  }
+  @media (max-width: 600px) {
+    body { padding: 12px; }
+    h1 { font-size: 24px; }
+    h2 { font-size: 18px; }
+    table { font-size: 12px; }
+    th, td { padding: 8px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🍽 TavolaLeggera</h1>
+  <p class="subtitle">Guida completa ai macronutrienti e target</p>
+</header>
+
+<div class="section">
+  <h2>Cos'è un macronutriente?</h2>
+  <p>I <strong>macronutrienti</strong> sono i tre nutrienti principali che il corpo usa per energia e funzioni vitali:</p>
+  <ul>
+    <li><span class="macro-icon">💪</span><strong>Proteine (P)</strong> — costruiscono e riparano muscoli, ossa, pelle, capelli</li>
+    <li><span class="macro-icon">⚡</span><strong>Carboidrati (C)</strong> — energia principale per il cervello e i muscoli</li>
+    <li><span class="macro-icon">🧈</span><strong>Grassi (G)</strong> — energia, assorbimento vitamine, ormoni</li>
+  </ul>
+</div>
+
+<h2>Target di macro consigliati</h2>
+<p>I target sottostanti sono <strong>percentuali generiche</strong> basate su linee guida nutrizionali internazionali (LARN, USDA). Non sostituiscono il consiglio di un medico o nutrizionista.</p>
+
+<div class="section">
+  <h3>Per le DONNE</h3>
+  <p><strong>Intake calorico tipico:</strong> 1.600–1.900 kcal/giorno (varia per età, attività, peso)</p>
+  <table>
+    <tr>
+      <th>Macronutriente</th>
+      <th>% delle calorie</th>
+      <th>Grammi (su 1.700 kcal)</th>
+    </tr>
+    <tr>
+      <td><strong>Proteine</strong></td>
+      <td>25–30%</td>
+      <td>106–128 g</td>
+    </tr>
+    <tr>
+      <td><strong>Carboidrati</strong></td>
+      <td>45–50%</td>
+      <td>191–213 g</td>
+    </tr>
+    <tr>
+      <td><strong>Grassi</strong></td>
+      <td>20–25%</td>
+      <td>38–47 g</td>
+    </tr>
+  </table>
+  <div class="example">
+Esempio (1.700 kcal): 28% Proteine = 120g | 48% Carbs = 204g | 24% Grassi = 45g
+  </div>
+</div>
+
+<div class="section">
+  <h3>Per gli UOMINI</h3>
+  <p><strong>Intake calorico tipico:</strong> 1.900–2.200 kcal/giorno (varia per età, attività, peso)</p>
+  <table>
+    <tr>
+      <th>Macronutriente</th>
+      <th>% delle calorie</th>
+      <th>Grammi (su 2.000 kcal)</th>
+    </tr>
+    <tr>
+      <td><strong>Proteine</strong></td>
+      <td>25–30%</td>
+      <td>125–150 g</td>
+    </tr>
+    <tr>
+      <td><strong>Carboidrati</strong></td>
+      <td>45–50%</td>
+      <td>225–250 g</td>
+    </tr>
+    <tr>
+      <td><strong>Grassi</strong></td>
+      <td>20–25%</td>
+      <td>44–56 g</td>
+    </tr>
+  </table>
+  <div class="example">
+Esempio (2.000 kcal): 28% Proteine = 140g | 48% Carbs = 240g | 24% Grassi = 53g
+  </div>
+</div>
+
+<div class="section">
+  <h2>Come usare il tracciamento macro in TavolaLeggera</h2>
+  
+  <h3>1️⃣ Aggiungi alimenti personalizzati (tab "Miei")</h3>
+  <p>Nel form <strong>"Aggiungi un alimento"</strong>, puoi indicare <strong>facoltativamente</strong>:</p>
+  <ul>
+    <li>Proteine g (per 100g)</li>
+    <li>Carbs g (per 100g)</li>
+    <li>Grassi g (per 100g)</li>
+  </ul>
+  <p style="color: var(--text-dim); font-size: 13px; margin-top: 8px;">Se li lasci a 0, l'app traccia solo le calorie.</p>
+  <div class="example">
+Nome: Petto di pollo
+Porzione: 150g | Kcal/100g: 165
+Proteine: 31g | Carbs: 0g | Grassi: 3.6g
+  </div>
+
+  <h3>2️⃣ Nel Diario, vedi subito i macro</h3>
+  <p>Quando aggiungi un alimento, appare accanto:</p>
+  <div class="example">
+Petto di pollo 150g | P 47g | C 0g | G 5g | 248 kcal
+  </div>
+
+  <h3>3️⃣ Totali giornalieri</h3>
+  <p>In fondo al Diario trovi:</p>
+  <div class="example">
+TOTALI GIORNALIERI
+250 Kcal | 3 Proteine g | 40 Carbs g | 12 Grassi g
+  </div>
+  <p style="margin-top: 12px;">Confronta con i target sopra.</p>
+</div>
+
+<div class="section">
+  <h2>Strategie pratiche per i target</h2>
+  
+  <div class="card">
+    <div class="card-title">💪 Per aumentare le Proteine</div>
+    <div class="card-content">
+      • Pollo, pesce, uova<br>
+      • Latte, yogurt, ricotta<br>
+      • Legumi (ceci, lenticchie, fagioli)<br>
+      <strong style="color: var(--amber);">Consiglio:</strong> una fonte proteica a colazione, pranzo, cena
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚡ Per i Carboidrati</div>
+    <div class="card-content">
+      • Pane, pasta, riso (integrale = più fibre)<br>
+      • Frutta (banane, arance, mele)<br>
+      • Patate, legumi<br>
+      <strong style="color: var(--amber);">Regola:</strong> la metà del piatto a pranzo/cena
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🧈 Per i Grassi</div>
+    <div class="card-content">
+      • Olio d'oliva (con moderazione)<br>
+      • Noci, mandorle, avocado<br>
+      • Pesce grasso (salmone, sgombro)<br>
+      <strong style="color: var(--amber);">Importante:</strong> non eliminarli, servono per ormoni e vitamine
+    </div>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <div class="disclaimer-title">⚠️ DISCLAIMER IMPORTANTE</div>
+  <p><strong>Non è consiglio medico.</strong> Questi target sono linee guida generiche. Se hai condizioni mediche specifiche (diabete, colesterolo, malattie renali), consulta un medico o nutrizionista.</p>
+  <p><strong>I dati sono approssimativi.</strong> Le calorie e i macro nel database sono stime. La realtà varia per marca, cottura, provenienza.</p>
+  <p><strong>Nessuna garanzia di risultati.</strong> Deficit calorico + esercizio = dimagrimento. Ma ogni corpo è diverso. Genetica, metabolismo, medicinali influenzano i risultati.</p>
+  <p><strong>L'app traccia solo quello che inserisci.</strong> Responsabilità dell'utente.</p>
+  <p><strong>Non è uno strumento medico.</strong> Per problemi di peso, allergie, intolleranze, parla con un professionista.</p>
+</div>
+
+<div class="section">
+  <h2>Consigli pratici</h2>
+  <ul>
+    <li><strong>🎯 Stai "vicino" al target, non esatto.</strong> Se il target è 120g e ne mangi 115g, va bene.</li>
+    <li><strong>🎯 Traccia per una settimana intera.</strong> Un giorno sbagliato non conta. Guarda il trend settimanale nel tab Storico.</li>
+    <li><strong>🎯 I grassi "buoni" contano come i "cattivi".</strong> L'app non distingue. Ma il corpo sì.</li>
+    <li><strong>🎯 Fibre = regalo.</strong> Carbs con fibre saziano più di quelli raffinati. L'app non le separa, ma notalo.</li>
+    <li><strong>🎯 Attività fisica cambia tutto.</strong> Se fai esercizio intenso, il fabbisogno aumenta.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>FAQ Macro</h2>
+  
+  <h3>D: Mi mancano 20g di proteine. Devo aggiungere qualcosa?</h3>
+  <p>R: Dipende dal tuo obiettivo. Se stai facendo esercizio, sì. Se sei sedentario, non è critico.</p>
+
+  <h3>D: I grassi mi spaventano. Posso mangiare zero?</h3>
+  <p>R: No. Il corpo ha bisogno di almeno 15-20g di grassi al giorno per ormoni, vitamine, cervello. Non eliminarli.</p>
+
+  <h3>D: Domani ho una festa e mangio male. Che faccio?</h3>
+  <p>R: Godi la festa. Un giorno non fa nulla. Torna in traccia il giorno dopo.</p>
+
+  <h3>D: Quale macro è più importante?</h3>
+  <p>R: Se sei attivo → Proteine. Se vuoi energia → Carboidrati. Tutti e tre servono.</p>
+
+  <h3>D: Trovo due cibi uguali con valori diversi. Quale uso?</h3>
+  <p>R: Usa quello che più si avvicina al tuo cibo reale. L'app è uno strumento, non scienza esatta.</p>
+</div>
+
+<div class="footer">
+  <p><strong>🍽 TavolaLeggera</strong> — Tracciamento consapevole</p>
+  <p>App creata da <strong>fotolapissable</strong> — Giugno 2026</p>
+  <p>Per segnalare alimenti mancanti, usa il campo Note giornaliero</p>
+  <p style="margin-top: 12px; color: #7a5e4f;">Questa app è uno strumento per l'auto-consapevolezza, non una diagnosi medica. Buon tracciamento! 🥗</p>
+</div>
+
+</body>
+</html>
