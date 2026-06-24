@@ -84,7 +84,9 @@
   .porzione-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
   .porzione-input { background: var(--bg3); border: 2px solid var(--amber); border-radius: 12px; color: var(--text); font-size: 28px; font-weight: 700; padding: 10px 16px; width: 130px; text-align: center; outline: none; }
   .porzione-unit { font-size: 16px; color: var(--text-dim); }
-  .porzione-kcal-preview { font-size: 14px; color: var(--amber); margin-bottom: 16px; min-height: 20px; }
+  .porzione-kcal-preview { font-size: 14px; color: var(--amber); margin-bottom: 4px; min-height: 20px; }
+  .macro-preview { font-size: 12px; color: var(--text-dim); margin-bottom: 16px; min-height: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .macro-preview span { color: var(--text); font-weight: 600; }
   .quick-portions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
   .quick-btn { background: var(--bg3); border: 1px solid var(--bg3); border-radius: 8px; color: var(--text-dim); font-size: 13px; padding: 6px 12px; cursor: pointer; }
   .quick-btn:active { background: var(--amber-dim); color: var(--text); }
@@ -98,9 +100,25 @@
   .diario-item { background: var(--bg2); border-radius: var(--radius); padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; }
   .diario-name { font-size: 14px; font-weight: 500; }
   .diario-porzione { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
-  .diario-kcal { font-size: 16px; font-weight: 700; color: var(--amber); }
+  .diario-kcal { font-size: 15px; font-weight: 700; color: var(--amber); white-space: nowrap; }
   .diario-del { background: none; border: none; color: var(--text-dim); font-size: 20px; padding: 4px 8px; cursor: pointer; margin-left: 4px; }
   .diario-edit { background: none; border: none; color: var(--text-dim); font-size: 16px; padding: 4px 6px; cursor: pointer; }
+
+  /* MACRO PILLS */
+  .macro-pills { display: flex; gap: 5px; margin-top: 3px; flex-wrap: wrap; }
+  .macro-pill { font-size: 10px; color: var(--text-dim); background: var(--bg3); border-radius: 4px; padding: 1px 5px; }
+  .macro-pill span { color: var(--text); font-weight: 600; }
+
+  /* TOTALI */
+  .diario-totals { background: var(--bg3); border-radius: var(--radius); padding: 12px 14px; margin-top: 8px; }
+  .totals-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; font-weight: 700; }
+  .totals-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 6px; }
+  .totals-cell { text-align: center; }
+  .totals-val { font-size: 16px; font-weight: 700; color: var(--amber); }
+  .totals-unit { font-size: 9px; color: var(--text-dim); }
+  .totals-cell.prot .totals-val { color: #7ec8e3; }
+  .totals-cell.carb .totals-val { color: #e8c56a; }
+  .totals-cell.fat  .totals-val { color: #e09a55; }
 
   .note-wrap { margin-top: 12px; }
   .note-input { width: 100%; background: var(--bg2); border: 1px solid var(--bg3); border-radius: var(--radius); color: var(--text); font-size: 14px; padding: 10px 12px; outline: none; resize: none; min-height: 60px; transition: border-color 0.2s; font-family: var(--font); }
@@ -130,10 +148,8 @@
   .chart-bar.over { background: var(--red); }
   .chart-bar.empty { background: var(--bg3); }
   .chart-day { font-size: 9px; color: var(--text-dim); margin-top: 4px; }
-  .chart-val { font-size: 9px; color: var(--text-dim); }
 
   /* PASTI RICORRENTI */
-  .ricorrenti-section { margin-bottom: 16px; }
   .ricorrente-item { background: var(--bg2); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 6px; }
   .ricorrente-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
   .ricorrente-name { font-size: 14px; font-weight: 700; color: var(--amber); }
@@ -144,15 +160,17 @@
   .btn-small.green { color: var(--green); }
   .btn-small.red { color: var(--red); }
 
-  /* AGGIUNGI ALIMENTO CUSTOM */
+  /* FORM CUSTOM */
   .custom-form { background: var(--bg2); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; }
   .custom-form h3 { font-size: 14px; font-weight: 700; color: var(--amber); margin-bottom: 14px; }
   .form-row { margin-bottom: 10px; }
   .form-row label { font-size: 12px; color: var(--text-dim); display: block; margin-bottom: 4px; }
   .form-input { width: 100%; background: var(--bg3); border: 1px solid var(--bg3); border-radius: 8px; color: var(--text); font-size: 15px; padding: 10px 12px; outline: none; transition: border-color 0.2s; }
   .form-input:focus { border-color: var(--amber); }
-  .form-row-2 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .form-row-2 { display: grid; gap: 8px; margin-bottom: 10px; }
+  .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px; }
   .unit-select { background: var(--bg3); border: 1px solid var(--bg3); border-radius: 8px; color: var(--text); font-size: 15px; padding: 10px 8px; outline: none; width: 100%; }
+  .form-sub-label { font-size: 11px; color: var(--text-dim); display: block; margin-bottom: 4px; }
 
   .section-title { font-size: 13px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
 
@@ -163,7 +181,7 @@
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   .badge { background: var(--amber-dim); color: var(--amber); font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; margin-left: 4px; vertical-align: middle; }
 
-  /* BANNER FOTOLAPISSABLE */
+  /* BANNER */
   .foto-banner { background: linear-gradient(135deg, #1a1008 0%, #2a1a0a 50%, #1a1008 100%); border: 1px solid var(--amber-dim); border-radius: var(--radius); padding: 14px 16px; margin: 16px 16px 0; display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
   .foto-banner:active { border-color: var(--amber); background: #2e1e0a; }
   .foto-logo { font-size: 28px; line-height: 1; flex-shrink: 0; }
@@ -201,7 +219,6 @@
   <div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div></div>
 </header>
 
-<!-- BANNER FOTOLAPISSABLE -->
 <a class="foto-banner" href="https://www.fotolapissable.it" target="_blank" rel="noopener">
   <div class="foto-logo">⚛️</div>
   <div class="foto-text">
@@ -250,21 +267,36 @@
       <label>Nome alimento</label>
       <input class="form-input" type="text" id="customName" placeholder="es. Gelato al pistacchio">
     </div>
-    <div class="form-row-2">
+    <div class="form-row-2" style="grid-template-columns:1fr 1fr 1fr;">
       <div>
-        <label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px">Porzione</label>
+        <label class="form-sub-label">Porzione</label>
         <input class="form-input" type="number" id="customPorzione" placeholder="100" min="1">
       </div>
       <div>
-        <label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px">Unità</label>
+        <label class="form-sub-label">Unità</label>
         <select class="unit-select" id="customUnit">
           <option value="g">g</option>
           <option value="ml">ml</option>
         </select>
       </div>
       <div>
-        <label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px">Kcal/100g</label>
-        <input class="form-input" type="number" id="customKcal100" placeholder="es. 250" min="1">
+        <label class="form-sub-label">Kcal/100g</label>
+        <input class="form-input" type="number" id="customKcal100" placeholder="250" min="1">
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--text-dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Macronutrienti per 100g (opzionale)</div>
+    <div class="form-row-3">
+      <div>
+        <label class="form-sub-label">Proteine g</label>
+        <input class="form-input" type="number" id="customProtein" placeholder="0" min="0" step="0.1">
+      </div>
+      <div>
+        <label class="form-sub-label">Carbs g</label>
+        <input class="form-input" type="number" id="customCarbs" placeholder="0" min="0" step="0.1">
+      </div>
+      <div>
+        <label class="form-sub-label">Grassi g</label>
+        <input class="form-input" type="number" id="customFat" placeholder="0" min="0" step="0.1">
       </div>
     </div>
     <button class="btn-primary" onclick="addCustomAlimento()" style="width:100%">Salva alimento</button>
@@ -299,6 +331,7 @@
       <span class="porzione-unit" id="porzioneUnit"></span>
     </div>
     <div class="porzione-kcal-preview" id="kcalPreview"></div>
+    <div class="macro-preview" id="macroPreview"></div>
     <div class="quick-portions" id="quickPortions"></div>
     <div class="modal-actions">
       <button class="btn-secondary" onclick="closeModal()">Annulla</button>
@@ -356,15 +389,11 @@
       </div>
       <div>
         <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">🔁 Pasti ricorrenti</div>
-        <div style="color:var(--text-dim)">Dal tab <b style="color:var(--text)">Diario</b>, dopo aver aggiunto gli alimenti, tocca <b style="color:var(--text)">"Salva come ricorrente"</b> per memorizzare il pasto. Dal tab <b style="color:var(--text)">Pasti</b> puoi ricaricarlo in un click.</div>
+        <div style="color:var(--text-dim)">Dal tab <b style="color:var(--text)">Diario</b>, dopo aver aggiunto gli alimenti, tocca <b style="color:var(--text)">"Salva come ricorrente"</b>. Dal tab <b style="color:var(--text)">Pasti</b> puoi ricaricarlo in un click.</div>
       </div>
       <div>
         <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">✏️ Modifica porzione</div>
-        <div style="color:var(--text-dim)">Nel Diario, tocca l'icona ✏️ accanto a un alimento per modificarne la porzione senza doverlo eliminare e reinserire.</div>
-      </div>
-      <div>
-        <div style="font-weight:700;color:var(--amber-light);margin-bottom:4px">📊 Storico ed export</div>
-        <div style="color:var(--text-dim)">Nel tab Storico trovi il grafico degli ultimi 7 giorni e puoi esportare tutto in CSV.</div>
+        <div style="color:var(--text-dim)">Nel Diario, tocca ✏️ accanto a un alimento per modificarne la porzione.</div>
       </div>
       <div style="background:var(--bg3);border-radius:10px;padding:12px;margin-top:4px">
         <div style="font-size:11px;color:var(--text-dim);text-align:center">I dati sono salvati solo sul tuo dispositivo.</div>
@@ -377,95 +406,94 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ---- HELP ----
 function openHelp() { document.getElementById('helpOverlay').classList.add('open'); }
 function closeHelp(e) {
   if (e && e.target !== document.getElementById('helpOverlay')) return;
   document.getElementById('helpOverlay').classList.remove('open');
 }
 
-// ---- ALIMENTI BASE ----
+// protein, carbs, fat = valori per 100g (fonte USDA / CREA)
 const ALIMENTI_BASE = [
-  { name: "1/2 Pollo allo spiedo (senza pelle)", porzione: 250, unit: "g", kcal100: 124 },
-  { name: "Acciughe fresche", porzione: 100, unit: "g", kcal100: 130 },
-  { name: "Arancino al ragù", porzione: 200, unit: "g", kcal100: 200 },
-  { name: "Arancia", porzione: 150, unit: "g", kcal100: 47 },
-  { name: "Birra (330ml)", porzione: 330, unit: "ml", kcal100: 42 },
-  { name: "Biscotti frollini", porzione: 30, unit: "g", kcal100: 460 },
-  { name: "Branzino (spigola) selvaggio", porzione: 150, unit: "g", kcal100: 82 },
-  { name: "Caffè espresso (bar)", porzione: 30, unit: "ml", kcal100: 17 },
-  { name: "Calamaro", porzione: 150, unit: "g", kcal100: 73 },
-  { name: "Caponata", porzione: 150, unit: "g", kcal100: 120 },
-  { name: "Carota cruda", porzione: 100, unit: "g", kcal100: 41 },
-  { name: "Cavolo cappuccio in insalata", porzione: 100, unit: "g", kcal100: 28 },
-  { name: "Cipolla cruda", porzione: 50, unit: "g", kcal100: 40 },
-  { name: "Costata di bovino", porzione: 200, unit: "g", kcal100: 225 },
-  { name: "Costata fiorentina", porzione: 400, unit: "g", kcal100: 225 },
-  { name: "Cozze con guscio", porzione: 200, unit: "g", kcal100: 43 },
-  { name: "Fagiolini/zucchine (cotti)", porzione: 150, unit: "g", kcal100: 33 },
-  { name: "Fichi d'India (senza buccia)", porzione: 120, unit: "g", kcal100: 55 },
-  { name: "Filetto di merluzzo (congelato)", porzione: 150, unit: "g", kcal100: 73 },
-  { name: "Finocchio crudo", porzione: 100, unit: "g", kcal100: 24 },
-  { name: "Fragole", porzione: 150, unit: "g", kcal100: 32 },
-  { name: "Gamberi sgusciati", porzione: 150, unit: "g", kcal100: 85 },
-  { name: "Grana grattugiato", porzione: 10, unit: "g", kcal100: 400 },
-  { name: "Granita di mandorla (bar)", porzione: 200, unit: "g", kcal100: 160 },
-  { name: "Insalata mista (condita)", porzione: 100, unit: "g", kcal100: 60 },
-  { name: "Latte scremato", porzione: 200, unit: "ml", kcal100: 34 },
-  { name: "Limone (succo)", porzione: 30, unit: "ml", kcal100: 27 },
-  { name: "Macedonia di frutta (senza zucchero)", porzione: 200, unit: "g", kcal100: 45 },
-  { name: "Mandorle", porzione: 30, unit: "g", kcal100: 580 },
-  { name: "Melanzana alla griglia", porzione: 150, unit: "g", kcal100: 55 },
-  { name: "Melanzana fritta (olio semi)", porzione: 100, unit: "g", kcal100: 200 },
-  { name: "Mortadella Bologna", porzione: 50, unit: "g", kcal100: 290 },
-  { name: "Musu e Piedi (gelatina bovina)", porzione: 100, unit: "g", kcal100: 160 },
-  { name: "Noci (gherigli)", porzione: 30, unit: "g", kcal100: 654 },
-  { name: "Olio d'oliva (1 cucchiaio)", porzione: 10, unit: "g", kcal100: 900 },
-  { name: "Olive nere (denocciolate)", porzione: 30, unit: "g", kcal100: 115 },
-  { name: "Olive verdi (denocciolate)", porzione: 30, unit: "g", kcal100: 100 },
-  { name: "Pangrattato", porzione: 10, unit: "g", kcal100: 380 },
-  { name: "Pane di semola bianco", porzione: 50, unit: "g", kcal100: 270 },
-  { name: "Pane di semola rimacinata", porzione: 50, unit: "g", kcal100: 260 },
-  { name: "Parmigiana di melanzane", porzione: 250, unit: "g", kcal100: 140 },
-  { name: "Pasta (cruda)", porzione: 80, unit: "g", kcal100: 350 },
-  { name: "Pasta alla Norma", porzione: 350, unit: "g", kcal100: 157 },
-  { name: "Pasta con le sarde", porzione: 350, unit: "g", kcal100: 148 },
-  { name: "Pesca", porzione: 150, unit: "g", kcal100: 40 },
-  { name: "Pecorino stagionato", porzione: 30, unit: "g", kcal100: 400 },
-  { name: "Peperone crudo", porzione: 100, unit: "g", kcal100: 31 },
-  { name: "Pesce spada", porzione: 150, unit: "g", kcal100: 120 },
-  { name: "Pesce spada alla griglia", porzione: 150, unit: "g", kcal100: 140 },
-  { name: "Petto di pollo impanato", porzione: 150, unit: "g", kcal100: 200 },
-  { name: "Pizza margherita grande", porzione: 400, unit: "g", kcal100: 250 },
-  { name: "Pizzetta da bar (pomodoro, formaggio, olive)", porzione: 100, unit: "g", kcal100: 280 },
-  { name: "Polipo", porzione: 150, unit: "g", kcal100: 73 },
-  { name: "Pomodori secchi sott'olio", porzione: 30, unit: "g", kcal100: 258 },
-  { name: "Pomodoro fresco", porzione: 150, unit: "g", kcal100: 18 },
-  { name: "Pomodoro tritato (salsa)", porzione: 100, unit: "g", kcal100: 25 },
-  { name: "Prosciutto San Daniele", porzione: 50, unit: "g", kcal100: 260 },
-  { name: "Provolone dolce", porzione: 30, unit: "g", kcal100: 350 },
-  { name: "Ricotta al forno (grattugiata)", porzione: 30, unit: "g", kcal100: 300 },
-  { name: "Ricotta fresca di pecora", porzione: 100, unit: "g", kcal100: 157 },
-  { name: "Riso (cotto)", porzione: 180, unit: "g", kcal100: 138 },
-  { name: "Salsiccia di maiale", porzione: 100, unit: "g", kcal100: 330 },
-  { name: "Sarde fresche", porzione: 100, unit: "g", kcal100: 135 },
-  { name: "Sgombro fresco", porzione: 150, unit: "g", kcal100: 170 },
-  { name: "Soffritto (olio+aglio+cipolla)", porzione: 15, unit: "g", kcal100: 600 },
-  { name: "Spaghetti alla carbonara (solo tuorlo)", porzione: 350, unit: "g", kcal100: 171 },
-  { name: "Spigola d'allevamento", porzione: 150, unit: "g", kcal100: 100 },
-  { name: "Sugo (tritato+pomodoro)", porzione: 100, unit: "g", kcal100: 90 },
-  { name: "Suro fresco", porzione: 150, unit: "g", kcal100: 97 },
-  { name: "Tonno in scatola in olio (80g)", porzione: 80, unit: "g", kcal100: 250 },
-  { name: "Tritato di bovino", porzione: 100, unit: "g", kcal100: 215 },
-  { name: "Tritato di suino", porzione: 100, unit: "g", kcal100: 280 },
-  { name: "Trunzu d'aci in insalata", porzione: 100, unit: "g", kcal100: 25 },
-  { name: "Uova alla coque (1 uovo)", porzione: 50, unit: "g", kcal100: 140 },
-  { name: "Uova strapazzate (2 uova + olio)", porzione: 120, unit: "g", kcal100: 175 },
-  { name: "Vino bianco 11.5° (200ml)", porzione: 200, unit: "ml", kcal100: 79 },
-  { name: "Vino rosso 13° (200ml)", porzione: 200, unit: "ml", kcal100: 85 },
-  { name: "Vongole con guscio", porzione: 200, unit: "g", kcal100: 45 },
-  { name: "Yogurt greco 0%", porzione: 150, unit: "g", kcal100: 57 },
-  { name: "Zucchina cruda", porzione: 150, unit: "g", kcal100: 17 },
+  { name: "1/2 Pollo allo spiedo (senza pelle)", porzione: 250, unit: "g", kcal100: 124, protein: 22,   carbs: 0,    fat: 3.6  },
+  { name: "Acciughe fresche",                     porzione: 100, unit: "g", kcal100: 130, protein: 20,   carbs: 0,    fat: 5.5  },
+  { name: "Arancino al ragù",                     porzione: 200, unit: "g", kcal100: 200, protein: 6,    carbs: 30,   fat: 6    },
+  { name: "Arancia",                              porzione: 150, unit: "g", kcal100:  47, protein: 0.9,  carbs: 11,   fat: 0.1  },
+  { name: "Birra (330ml)",                        porzione: 330, unit: "ml",kcal100:  42, protein: 0.4,  carbs: 3.5,  fat: 0    },
+  { name: "Biscotti frollini",                    porzione:  30, unit: "g", kcal100: 460, protein: 7,    carbs: 62,   fat: 20   },
+  { name: "Branzino (spigola) selvaggio",         porzione: 150, unit: "g", kcal100:  82, protein: 18,   carbs: 0,    fat: 1.5  },
+  { name: "Caffè espresso (bar)",                 porzione:  30, unit: "ml",kcal100:  17, protein: 0.6,  carbs: 2.8,  fat: 0.2  },
+  { name: "Calamaro",                             porzione: 150, unit: "g", kcal100:  73, protein: 15,   carbs: 1,    fat: 1.5  },
+  { name: "Caponata",                             porzione: 150, unit: "g", kcal100: 120, protein: 1.5,  carbs: 10,   fat: 8    },
+  { name: "Carota cruda",                         porzione: 100, unit: "g", kcal100:  41, protein: 0.9,  carbs: 10,   fat: 0.2  },
+  { name: "Cavolo cappuccio in insalata",         porzione: 100, unit: "g", kcal100:  28, protein: 1.5,  carbs: 5,    fat: 0.1  },
+  { name: "Cipolla cruda",                        porzione:  50, unit: "g", kcal100:  40, protein: 1.1,  carbs: 9,    fat: 0.1  },
+  { name: "Costata di bovino",                    porzione: 200, unit: "g", kcal100: 225, protein: 20,   carbs: 0,    fat: 15   },
+  { name: "Costata fiorentina",                   porzione: 400, unit: "g", kcal100: 225, protein: 20,   carbs: 0,    fat: 15   },
+  { name: "Cozze con guscio",                     porzione: 200, unit: "g", kcal100:  43, protein: 6,    carbs: 2,    fat: 1    },
+  { name: "Fagiolini/zucchine (cotti)",           porzione: 150, unit: "g", kcal100:  33, protein: 2,    carbs: 6,    fat: 0.3  },
+  { name: "Fichi d'India (senza buccia)",         porzione: 120, unit: "g", kcal100:  55, protein: 0.7,  carbs: 13,   fat: 0.1  },
+  { name: "Filetto di merluzzo (congelato)",      porzione: 150, unit: "g", kcal100:  73, protein: 17,   carbs: 0,    fat: 0.6  },
+  { name: "Finocchio crudo",                      porzione: 100, unit: "g", kcal100:  24, protein: 1.1,  carbs: 5,    fat: 0.2  },
+  { name: "Fragole",                              porzione: 150, unit: "g", kcal100:  32, protein: 0.7,  carbs: 7,    fat: 0.3  },
+  { name: "Gamberi sgusciati",                    porzione: 150, unit: "g", kcal100:  85, protein: 18,   carbs: 0.5,  fat: 1    },
+  { name: "Grana grattugiato",                    porzione:  10, unit: "g", kcal100: 400, protein: 35,   carbs: 0,    fat: 29   },
+  { name: "Granita di mandorla (bar)",            porzione: 200, unit: "g", kcal100: 160, protein: 1,    carbs: 37,   fat: 1    },
+  { name: "Insalata mista (condita)",             porzione: 100, unit: "g", kcal100:  60, protein: 1,    carbs: 4,    fat: 4    },
+  { name: "Latte scremato",                       porzione: 200, unit: "ml",kcal100:  34, protein: 3.5,  carbs: 5,    fat: 0.1  },
+  { name: "Limone (succo)",                       porzione:  30, unit: "ml",kcal100:  27, protein: 0.4,  carbs: 6,    fat: 0.3  },
+  { name: "Macedonia di frutta (senza zucchero)", porzione: 200, unit: "g", kcal100:  45, protein: 0.6,  carbs: 10,   fat: 0.2  },
+  { name: "Mandorle",                             porzione:  30, unit: "g", kcal100: 580, protein: 21,   carbs: 20,   fat: 50   },
+  { name: "Melanzana alla griglia",               porzione: 150, unit: "g", kcal100:  55, protein: 1.5,  carbs: 6,    fat: 2.5  },
+  { name: "Melanzana fritta (olio semi)",         porzione: 100, unit: "g", kcal100: 200, protein: 1.5,  carbs: 8,    fat: 17   },
+  { name: "Mortadella Bologna",                   porzione:  50, unit: "g", kcal100: 290, protein: 15,   carbs: 1.5,  fat: 25   },
+  { name: "Musu e Piedi (gelatina bovina)",       porzione: 100, unit: "g", kcal100: 160, protein: 20,   carbs: 0,    fat: 9    },
+  { name: "Noci (gherigli)",                      porzione:  30, unit: "g", kcal100: 654, protein: 15,   carbs: 14,   fat: 65   },
+  { name: "Olio d'oliva (1 cucchiaio)",           porzione:  10, unit: "g", kcal100: 900, protein: 0,    carbs: 0,    fat: 100  },
+  { name: "Olive nere (denocciolate)",            porzione:  30, unit: "g", kcal100: 115, protein: 0.8,  carbs: 3,    fat: 11   },
+  { name: "Olive verdi (denocciolate)",           porzione:  30, unit: "g", kcal100: 100, protein: 1,    carbs: 2.5,  fat: 10   },
+  { name: "Pangrattato",                          porzione:  10, unit: "g", kcal100: 380, protein: 11,   carbs: 76,   fat: 2    },
+  { name: "Pane di semola bianco",                porzione:  50, unit: "g", kcal100: 270, protein: 9,    carbs: 55,   fat: 1.5  },
+  { name: "Pane di semola rimacinata",            porzione:  50, unit: "g", kcal100: 260, protein: 8,    carbs: 53,   fat: 1.5  },
+  { name: "Parmigiana di melanzane",              porzione: 250, unit: "g", kcal100: 140, protein: 5,    carbs: 8,    fat: 9    },
+  { name: "Pasta (cruda)",                        porzione:  80, unit: "g", kcal100: 350, protein: 13,   carbs: 70,   fat: 2    },
+  { name: "Pasta alla Norma",                     porzione: 350, unit: "g", kcal100: 157, protein: 5,    carbs: 20,   fat: 6    },
+  { name: "Pasta con le sarde",                   porzione: 350, unit: "g", kcal100: 148, protein: 7,    carbs: 18,   fat: 5.5  },
+  { name: "Pesca",                                porzione: 150, unit: "g", kcal100:  40, protein: 0.9,  carbs: 9,    fat: 0.1  },
+  { name: "Pecorino stagionato",                  porzione:  30, unit: "g", kcal100: 400, protein: 25,   carbs: 0,    fat: 33   },
+  { name: "Peperone crudo",                       porzione: 100, unit: "g", kcal100:  31, protein: 1,    carbs: 6,    fat: 0.3  },
+  { name: "Pesce spada",                          porzione: 150, unit: "g", kcal100: 120, protein: 23,   carbs: 0,    fat: 3    },
+  { name: "Pesce spada alla griglia",             porzione: 150, unit: "g", kcal100: 140, protein: 24,   carbs: 0,    fat: 4.5  },
+  { name: "Petto di pollo impanato",              porzione: 150, unit: "g", kcal100: 200, protein: 18,   carbs: 10,   fat: 9    },
+  { name: "Pizza margherita grande",              porzione: 400, unit: "g", kcal100: 250, protein: 9,    carbs: 33,   fat: 9    },
+  { name: "Pizzetta da bar (pomodoro, formaggio, olive)", porzione: 100, unit: "g", kcal100: 280, protein: 9, carbs: 33, fat: 12 },
+  { name: "Polipo",                               porzione: 150, unit: "g", kcal100:  73, protein: 15,   carbs: 1,    fat: 1.5  },
+  { name: "Pomodori secchi sott'olio",            porzione:  30, unit: "g", kcal100: 258, protein: 5,    carbs: 38,   fat: 11   },
+  { name: "Pomodoro fresco",                      porzione: 150, unit: "g", kcal100:  18, protein: 0.9,  carbs: 3.5,  fat: 0.2  },
+  { name: "Pomodoro tritato (salsa)",             porzione: 100, unit: "g", kcal100:  25, protein: 1.1,  carbs: 4.5,  fat: 0.2  },
+  { name: "Prosciutto San Daniele",               porzione:  50, unit: "g", kcal100: 260, protein: 27,   carbs: 0,    fat: 17   },
+  { name: "Provolone dolce",                      porzione:  30, unit: "g", kcal100: 350, protein: 25,   carbs: 2,    fat: 27   },
+  { name: "Ricotta al forno (grattugiata)",       porzione:  30, unit: "g", kcal100: 300, protein: 18,   carbs: 4,    fat: 24   },
+  { name: "Ricotta fresca di pecora",             porzione: 100, unit: "g", kcal100: 157, protein: 8,    carbs: 4,    fat: 12   },
+  { name: "Riso (cotto)",                         porzione: 180, unit: "g", kcal100: 138, protein: 2.8,  carbs: 30,   fat: 0.3  },
+  { name: "Salsiccia di maiale",                  porzione: 100, unit: "g", kcal100: 330, protein: 13,   carbs: 2,    fat: 30   },
+  { name: "Sarde fresche",                        porzione: 100, unit: "g", kcal100: 135, protein: 20,   carbs: 0,    fat: 6    },
+  { name: "Sgombro fresco",                       porzione: 150, unit: "g", kcal100: 170, protein: 20,   carbs: 0,    fat: 10   },
+  { name: "Soffritto (olio+aglio+cipolla)",       porzione:  15, unit: "g", kcal100: 600, protein: 0.5,  carbs: 5,    fat: 60   },
+  { name: "Spaghetti alla carbonara (solo tuorlo)", porzione: 350, unit: "g", kcal100: 171, protein: 8,  carbs: 22,   fat: 6    },
+  { name: "Spigola d'allevamento",                porzione: 150, unit: "g", kcal100: 100, protein: 19,   carbs: 0,    fat: 2.5  },
+  { name: "Sugo (tritato+pomodoro)",              porzione: 100, unit: "g", kcal100:  90, protein: 6,    carbs: 5,    fat: 5    },
+  { name: "Suro fresco",                          porzione: 150, unit: "g", kcal100:  97, protein: 18,   carbs: 0,    fat: 3    },
+  { name: "Tonno in scatola in olio (80g)",       porzione:  80, unit: "g", kcal100: 250, protein: 26,   carbs: 0,    fat: 17   },
+  { name: "Tritato di bovino",                    porzione: 100, unit: "g", kcal100: 215, protein: 18,   carbs: 0,    fat: 15   },
+  { name: "Tritato di suino",                     porzione: 100, unit: "g", kcal100: 280, protein: 17,   carbs: 0,    fat: 23   },
+  { name: "Trunzu d'aci in insalata",             porzione: 100, unit: "g", kcal100:  25, protein: 1,    carbs: 5,    fat: 0.1  },
+  { name: "Uova alla coque (1 uovo)",             porzione:  50, unit: "g", kcal100: 140, protein: 12,   carbs: 0.5,  fat: 10   },
+  { name: "Uova strapazzate (2 uova + olio)",     porzione: 120, unit: "g", kcal100: 175, protein: 10,   carbs: 1,    fat: 14   },
+  { name: "Vino bianco 11.5° (200ml)",            porzione: 200, unit: "ml",kcal100:  79, protein: 0.1,  carbs: 2.5,  fat: 0    },
+  { name: "Vino rosso 13° (200ml)",               porzione: 200, unit: "ml",kcal100:  85, protein: 0.1,  carbs: 2.6,  fat: 0    },
+  { name: "Vongole con guscio",                   porzione: 200, unit: "g", kcal100:  45, protein: 6,    carbs: 2,    fat: 0.8  },
+  { name: "Yogurt greco 0%",                      porzione: 150, unit: "g", kcal100:  57, protein: 10,   carbs: 4,    fat: 0.1  },
+  { name: "Zucchina cruda",                       porzione: 150, unit: "g", kcal100:  17, protein: 1.2,  carbs: 3.1,  fat: 0.2  },
 ];
 
 const DEFICIT_TARGET = 500;
@@ -493,7 +521,6 @@ function changeDay(dir) {
   render();
 }
 
-// ---- STORAGE ----
 function getDayData(key) {
   try { return JSON.parse(localStorage.getItem('calorie_' + key) || '{"garmin":2152,"pasti":[],"note":""}'); }
   catch { return { garmin: 2152, pasti: [], note: '' }; }
@@ -517,7 +544,6 @@ function getAllAlimenti() {
   return [...ALIMENTI_BASE, ...custom].sort((a,b) => a.name.localeCompare(b.name, 'it'));
 }
 
-// ---- RENDER ----
 function render() {
   document.getElementById('dateLabel').textContent = dateLabel(currentDay);
   const data = getDayData(currentDay);
@@ -582,22 +608,61 @@ function renderAlimentiList(filter = '') {
   }).join('') || `<div class="empty-state"><div class="empty-icon">🔍</div>Nessun alimento trovato</div>`;
 }
 
+function macroHtml(p) {
+  if (!p.prot && !p.carb && !p.fat) return '';
+  return `<div class="macro-pills">
+    <div class="macro-pill">P <span>${Math.round(p.prot||0)}g</span></div>
+    <div class="macro-pill">C <span>${Math.round(p.carb||0)}g</span></div>
+    <div class="macro-pill">G <span>${Math.round(p.fat||0)}g</span></div>
+  </div>`;
+}
+
 function renderDiario(data) {
   const list = document.getElementById('diarioList');
   if (!data.pasti.length) {
     list.innerHTML = `<div class="empty-state"><div class="empty-icon">🍽</div>Nessun alimento aggiunto oggi</div>`;
     return;
   }
-  list.innerHTML = data.pasti.map((p,i) => `
+  const rows = data.pasti.map((p,i) => `
     <div class="diario-item">
       <div style="flex:1">
         <div class="diario-name">${p.name}</div>
         <div class="diario-porzione">${p.porzione}${p.unit}</div>
+        ${macroHtml(p)}
       </div>
       <div class="diario-kcal">${Math.round(p.kcal)} kcal</div>
       <button class="diario-edit" onclick="editAlimento(${i})" title="Modifica porzione">✏️</button>
       <button class="diario-del" onclick="removeAlimento(${i})">✕</button>
     </div>`).join('');
+
+  const totKcal = Math.round(data.pasti.reduce((s,p) => s+p.kcal, 0));
+  const totProt = Math.round(data.pasti.reduce((s,p) => s+(p.prot||0), 0));
+  const totCarb = Math.round(data.pasti.reduce((s,p) => s+(p.carb||0), 0));
+  const totFat  = Math.round(data.pasti.reduce((s,p) => s+(p.fat||0), 0));
+
+  const totalsRow = `<div class="diario-totals">
+    <div class="totals-label">Totali giornalieri</div>
+    <div class="totals-grid">
+      <div class="totals-cell">
+        <div class="totals-val">${totKcal}</div>
+        <div class="totals-unit">Kcal</div>
+      </div>
+      <div class="totals-cell prot">
+        <div class="totals-val">${totProt}</div>
+        <div class="totals-unit">Proteine g</div>
+      </div>
+      <div class="totals-cell carb">
+        <div class="totals-val">${totCarb}</div>
+        <div class="totals-unit">Carbs g</div>
+      </div>
+      <div class="totals-cell fat">
+        <div class="totals-val">${totFat}</div>
+        <div class="totals-unit">Grassi g</div>
+      </div>
+    </div>
+  </div>`;
+
+  list.innerHTML = rows + totalsRow;
 }
 
 function renderCustomList() {
@@ -700,20 +765,20 @@ function renderRicorrenti() {
   }).join('');
 }
 
-// ---- CUSTOM ALIMENTI ----
 function addCustomAlimento() {
   const name = document.getElementById('customName').value.trim();
   const porzione = parseFloat(document.getElementById('customPorzione').value);
   const unit = document.getElementById('customUnit').value;
   const kcal100 = parseFloat(document.getElementById('customKcal100').value);
   if (!name || !porzione || !kcal100) { showToast('Compila tutti i campi'); return; }
+  const protein = parseFloat(document.getElementById('customProtein').value) || 0;
+  const carbs   = parseFloat(document.getElementById('customCarbs').value)   || 0;
+  const fat     = parseFloat(document.getElementById('customFat').value)     || 0;
   const customs = getCustomAlimenti();
-  customs.push({ name, porzione, unit, kcal100 });
+  customs.push({ name, porzione, unit, kcal100, protein, carbs, fat });
   customs.sort((a,b) => a.name.localeCompare(b.name,'it'));
   saveCustomAlimenti(customs);
-  document.getElementById('customName').value = '';
-  document.getElementById('customPorzione').value = '';
-  document.getElementById('customKcal100').value = '';
+  ['customName','customPorzione','customKcal100','customProtein','customCarbs','customFat'].forEach(id => document.getElementById(id).value = '');
   renderCustomList();
   renderAlimentiList();
   showToast(`"${name}" aggiunto!`);
@@ -729,7 +794,6 @@ function deleteCustomAlimento(idx) {
   showToast(`"${name}" eliminato`);
 }
 
-// ---- PASTI RICORRENTI ----
 function savePastoRicorrente() {
   const data = getDayData(currentDay);
   if (!data.pasti.length) { showToast('Aggiungi prima degli alimenti'); return; }
@@ -775,7 +839,6 @@ function deleteRicorrente(idx) {
   showToast(`"${name}" eliminato`);
 }
 
-// ---- MODAL ----
 let _allAlimenti = [];
 function openModal(idx, allList) {
   _allAlimenti = allList || getAllAlimenti();
@@ -798,7 +861,13 @@ function editAlimento(idx) {
   const data = getDayData(currentDay);
   const p = data.pasti[idx];
   editingDiarioIdx = idx;
-  selectedAlimento = { name: p.name, porzione: p.porzione, unit: p.unit, kcal100: p.kcal / p.porzione * 100 };
+  const kcal100 = p.kcal / p.porzione * 100;
+  selectedAlimento = {
+    name: p.name, porzione: p.porzione, unit: p.unit, kcal100,
+    protein: p.prot != null ? p.prot / p.porzione * 100 : 0,
+    carbs:   p.carb != null ? p.carb / p.porzione * 100 : 0,
+    fat:     p.fat  != null ? p.fat  / p.porzione * 100 : 0,
+  };
   document.getElementById('modalTitle').textContent = p.name;
   document.getElementById('modalSub').textContent = `Modifica la porzione`;
   document.getElementById('porzioneInput').value = p.porzione;
@@ -816,8 +885,20 @@ function setQty(q) { document.getElementById('porzioneInput').value = q; updateP
 
 function updatePreview() {
   const qty = parseFloat(document.getElementById('porzioneInput').value);
-  if (!selectedAlimento || !qty) { document.getElementById('kcalPreview').textContent=''; return; }
-  document.getElementById('kcalPreview').textContent = `→ ${Math.round(qty/100*selectedAlimento.kcal100)} kcal per ${qty}${selectedAlimento.unit}`;
+  if (!selectedAlimento || !qty) {
+    document.getElementById('kcalPreview').textContent = '';
+    document.getElementById('macroPreview').innerHTML = '';
+    return;
+  }
+  const r = qty / 100;
+  document.getElementById('kcalPreview').textContent = `→ ${Math.round(r * selectedAlimento.kcal100)} kcal per ${qty}${selectedAlimento.unit}`;
+  const pr = selectedAlimento.protein, ca = selectedAlimento.carbs, fa = selectedAlimento.fat;
+  if (pr || ca || fa) {
+    document.getElementById('macroPreview').innerHTML =
+      `P <span>${(r*(pr||0)).toFixed(1)}g</span> &nbsp; C <span>${(r*(ca||0)).toFixed(1)}g</span> &nbsp; G <span>${(r*(fa||0)).toFixed(1)}g</span>`;
+  } else {
+    document.getElementById('macroPreview').innerHTML = '';
+  }
 }
 
 function closeModal(e) {
@@ -829,13 +910,24 @@ function closeModal(e) {
 
 function addAlimento() {
   const qty = parseFloat(document.getElementById('porzioneInput').value);
-  if (!selectedAlimento || !qty || qty<=0) return;
+  if (!selectedAlimento || !qty || qty <= 0) return;
   const data = getDayData(currentDay);
-  if (editingDiarioIdx !== null) {
+  const ratio = qty / 100;
+  const wasEditing = editingDiarioIdx !== null;
+  if (wasEditing) {
     data.pasti[editingDiarioIdx].porzione = qty;
-    data.pasti[editingDiarioIdx].kcal = qty / 100 * selectedAlimento.kcal100;
+    data.pasti[editingDiarioIdx].kcal = ratio * selectedAlimento.kcal100;
+    data.pasti[editingDiarioIdx].prot = ratio * (selectedAlimento.protein || 0);
+    data.pasti[editingDiarioIdx].carb = ratio * (selectedAlimento.carbs   || 0);
+    data.pasti[editingDiarioIdx].fat  = ratio * (selectedAlimento.fat     || 0);
   } else {
-    data.pasti.push({ name: selectedAlimento.name, porzione: qty, unit: selectedAlimento.unit, kcal: qty/100*selectedAlimento.kcal100 });
+    data.pasti.push({
+      name: selectedAlimento.name, porzione: qty, unit: selectedAlimento.unit,
+      kcal: ratio * selectedAlimento.kcal100,
+      prot: ratio * (selectedAlimento.protein || 0),
+      carb: ratio * (selectedAlimento.carbs   || 0),
+      fat:  ratio * (selectedAlimento.fat     || 0),
+    });
   }
   saveDayData(currentDay, data);
   document.getElementById('modalOverlay').classList.remove('open');
@@ -843,7 +935,7 @@ function addAlimento() {
   editingDiarioIdx = null;
   updateBilancio(data);
   renderDiario(data);
-  showToast(editingDiarioIdx !== null ? 'Aggiornato!' : 'Aggiunto!');
+  showToast(wasEditing ? 'Aggiornato!' : 'Aggiunto!');
 }
 
 function removeAlimento(idx) {
@@ -854,7 +946,6 @@ function removeAlimento(idx) {
   renderDiario(data);
 }
 
-// ---- EXPORT CSV ----
 function exportCSV() {
   const keys = [];
   for (let i=0; i<localStorage.length; i++) {
@@ -863,15 +954,18 @@ function exportCSV() {
   }
   keys.sort();
   if (!keys.length) { showToast('Nessun dato da esportare'); return; }
-  let csv = 'Data,Garmin kcal,Assunte kcal,Target kcal,Deficit effettivo,Note\n';
+  let csv = 'Data,Garmin kcal,Assunte kcal,Target kcal,Deficit effettivo,Proteine g,Carbs g,Grassi g,Note\n';
   keys.forEach(k => {
     const d = getDayData(k);
     const assunte = Math.round(d.pasti.reduce((s,p)=>s+p.kcal,0));
-    const garmin = d.garmin || 2152;
-    const target = garmin - DEFICIT_TARGET;
+    const garmin  = d.garmin || 2152;
+    const target  = garmin - DEFICIT_TARGET;
     const bilancio = garmin - assunte;
+    const totProt = Math.round(d.pasti.reduce((s,p)=>s+(p.prot||0),0));
+    const totCarb = Math.round(d.pasti.reduce((s,p)=>s+(p.carb||0),0));
+    const totFat  = Math.round(d.pasti.reduce((s,p)=>s+(p.fat||0),0));
     const note = (d.note || '').replace(/"/g, '""');
-    csv += `${k},${garmin},${assunte},${target},${bilancio},"${note}"\n`;
+    csv += `${k},${garmin},${assunte},${target},${bilancio},${totProt},${totCarb},${totFat},"${note}"\n`;
   });
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
@@ -882,7 +976,6 @@ function exportCSV() {
   showToast('CSV esportato!');
 }
 
-// ---- SEARCH ----
 function filterAlimenti() {
   const q = document.getElementById('searchInput').value;
   document.getElementById('clearBtn').style.display = q ? 'flex' : 'none';
@@ -894,7 +987,6 @@ function clearSearch() {
   renderAlimentiList();
 }
 
-// ---- TABS ----
 function showTab(name, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -906,7 +998,6 @@ function showTab(name, btn) {
   if (name === 'ricorrenti') renderRicorrenti();
 }
 
-// ---- TOAST ----
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -914,7 +1005,6 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2000);
 }
 
-// ---- INIT ----
 render();
 document.getElementById('nextDayBtn').disabled = true;
 </script>
