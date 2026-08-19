@@ -68,6 +68,57 @@
   .alimento-item:active { background: var(--bg3); border-color: var(--amber-dim); }
   .alimento-item.custom-item { border-left: 3px solid var(--amber-dim); }
   .alimento-name { font-size: 14px; font-weight: 500; }
+
+  /* SISTEMA TRE COLORI (Bilanciamo) */
+  .colore-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 7px; flex-shrink: 0; }
+  .colore-giallo { background: var(--yellow); }
+  .colore-rosso { background: var(--red); }
+  .colore-verde { background: var(--green); }
+  .name-row { display: flex; align-items: center; }
+  .colore-legend { display: flex; gap: 14px; padding: 10px 16px 2px; font-size: 11px; color: var(--text-dim); align-items: center; flex-wrap: wrap; }
+  .colore-legend .legend-item { display: flex; align-items: center; gap: 5px; }
+  .colore-balance { background: var(--bg2); border-radius: var(--radius); padding: 12px 14px; margin-top: 10px; }
+  .colore-balance-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .colore-bar { display: flex; height: 10px; border-radius: 6px; overflow: hidden; background: var(--bg3); }
+  .colore-bar-seg { height: 100%; transition: width 0.3s; }
+  .colore-bar-seg.giallo { background: var(--yellow); }
+  .colore-bar-seg.rosso { background: var(--red); }
+  .colore-bar-seg.verde { background: var(--green); }
+  .colore-bar-legend { display: flex; justify-content: space-between; margin-top: 8px; font-size: 11px; }
+  .colore-bar-legend span { display: flex; align-items: center; gap: 5px; color: var(--text-dim); }
+  .colore-bar-legend b { color: var(--text); font-weight: 700; }
+
+  /* PROFILO / PESO IDEALE / RDA PROTEICO */
+  .profilo-field { margin-bottom: 16px; }
+  .profilo-label { font-size: 12px; color: var(--text-dim); margin-bottom: 6px; display: block; }
+  .profilo-input, .profilo-select { width: 100%; background: var(--bg3); border: 1px solid var(--amber-dim); border-radius: 10px; color: var(--text); font-size: 16px; padding: 10px 14px; outline: none; }
+  .profilo-select { appearance: none; }
+  .rda-preview { background: var(--bg3); border-radius: 12px; padding: 14px; margin: 14px 0; }
+  .rda-preview-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 13px; }
+  .rda-preview-row b { color: var(--amber); font-size: 15px; }
+  .profilo-disclaimer { font-size: 11px; color: var(--text-dim); line-height: 1.5; background: var(--bg3); border-left: 3px solid var(--red); border-radius: 4px; padding: 10px 12px; margin-top: 4px; }
+
+  .rda-check { background: var(--bg2); border-radius: var(--radius); padding: 12px 14px; margin-top: 10px; }
+  .rda-check-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+  .rda-check-label a { color: var(--amber); text-decoration: none; font-size: 11px; text-transform: none; letter-spacing: 0; }
+  .rda-check-bar-bg { background: var(--bg3); border-radius: 6px; height: 8px; overflow: hidden; }
+  .rda-check-bar-fill { height: 100%; border-radius: 6px; background: var(--red); transition: width 0.3s; }
+  .rda-check-bar-fill.ok { background: var(--green); }
+  .rda-check-bar-fill.over { background: var(--yellow); }
+  .rda-check-text { font-size: 12px; color: var(--text-dim); margin-top: 6px; display: flex; justify-content: space-between; }
+  .rda-check-text b { color: var(--text); }
+
+  /* PIANIFICAZIONE WEEKEND (reverse planning) */
+  .weekend-card { background: var(--bg2); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; }
+  .weekend-title { font-size: 13px; font-weight: 700; color: var(--amber); margin-bottom: 4px; }
+  .weekend-sub { font-size: 12px; color: var(--text-dim); margin-bottom: 14px; line-height: 1.5; }
+  .weekend-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  .weekend-row label { font-size: 12px; color: var(--text-dim); flex: 1; }
+  .weekend-input { background: var(--bg3); border: 1px solid var(--amber-dim); border-radius: 10px; color: var(--text); font-size: 15px; padding: 8px 12px; width: 100px; text-align: right; outline: none; }
+  .weekend-result { background: var(--bg3); border-radius: 12px; padding: 14px; text-align: center; margin-top: 4px; }
+  .weekend-result-val { font-size: 26px; font-weight: 700; color: var(--amber); }
+  .weekend-result-label { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+  .weekend-result.warn .weekend-result-val { color: var(--red); }
   .alimento-meta { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
   .alimento-kcal { font-size: 16px; font-weight: 700; color: var(--amber); text-align: right; }
   .alimento-kcal-unit { font-size: 10px; color: var(--text-dim); }
@@ -199,6 +250,7 @@
     <h1>🍽 TavolaLeggera</h1>
     <div style="display:flex;align-items:center;gap:8px">
       <button class="date-btn" onclick="window.open('guida-macro.html', '_blank')" style="font-size:15px;font-weight:700;color:var(--amber)">?</button>
+      <button class="date-btn" onclick="openProfiloModal()" style="font-size:15px" title="Profilo · Peso ideale">⚙️</button>
       <div class="date-nav">
         <button class="date-btn" onclick="changeDay(-1)">‹</button>
         <div class="date-label" id="dateLabel"></div>
@@ -243,6 +295,11 @@
     <span class="search-icon">🔍</span>
     <input class="search-input" type="text" id="searchInput" placeholder="Cerca alimento..." oninput="filterAlimenti()" autocomplete="off">
     <button class="clear-btn" id="clearBtn" onclick="clearSearch()">✕</button>
+  </div>
+  <div class="colore-legend">
+    <span class="legend-item"><span class="colore-dot colore-giallo"></span>Giallo · Carboidrati (energia)</span>
+    <span class="legend-item"><span class="colore-dot colore-rosso"></span>Rosso · Proteine (struttura)</span>
+    <span class="legend-item"><span class="colore-dot colore-verde"></span>Verde · Grassi (riserva)</span>
   </div>
   <div class="alimenti-list" id="alimentiList"></div>
 </div>
@@ -312,6 +369,22 @@
 
 <!-- TAB STORICO -->
 <div class="section" id="tab-storico">
+  <div class="weekend-card">
+    <div class="weekend-title">📅 Pianifica il weekend (calcolo a ritroso)</div>
+    <div class="weekend-sub">Il corpo risponde alla somma settimanale, non al singolo giorno. Stima quanto mangerai nel weekend, e l'app ridistribuisce il resto sui giorni feriali.</div>
+    <div class="weekend-row">
+      <label>Fabbisogno settimanale (kcal)</label>
+      <input class="weekend-input" type="number" id="weekendSettimanale" oninput="updateWeekendPlan()">
+    </div>
+    <div class="weekend-row">
+      <label>Stima consumo weekend — Sab+Dom (kcal)</label>
+      <input class="weekend-input" type="number" id="weekendStima" oninput="updateWeekendPlan()">
+    </div>
+    <div class="weekend-result" id="weekendResult">
+      <div class="weekend-result-val" id="weekendResultVal">—</div>
+      <div class="weekend-result-label">kcal/giorno nei 5 giorni feriali</div>
+    </div>
+  </div>
   <button class="export-btn" onclick="exportCSV()">⬇️ Esporta storico CSV</button>
   <div class="chart-wrap">
     <div class="chart-title">Deficit ultimi 7 giorni</div>
@@ -403,7 +476,47 @@
   </div>
 </div>
 
+<!-- MODAL PROFILO / PESO IDEALE -->
+<div class="modal-overlay" id="profiloOverlay" onclick="closeProfiloModal(event)">
+  <div class="modal" style="max-height:85vh;overflow-y:auto">
+    <div class="modal-handle"></div>
+    <div style="font-size:18px;font-weight:700;color:var(--amber);margin-bottom:4px">⚙️ Profilo · Peso ideale</div>
+    <div class="modal-sub">Il metodo Bilanciamo calcola il target proteico sul tuo <b style="color:var(--text)">peso ideale</b>, non su quello attuale — spinge l'organismo verso il suo equilibrio naturale.</div>
+
+    <div class="profilo-field">
+      <label class="profilo-label">Altezza (cm)</label>
+      <input class="profilo-input" type="number" id="profiloAltezza" min="120" max="230" placeholder="es. 175" oninput="updateRdaPreview()">
+    </div>
+
+    <div class="profilo-field">
+      <label class="profilo-label">Livello di attività fisica</label>
+      <select class="profilo-select" id="profiloAttivita" onchange="updateRdaPreview()">
+        <option value="sedentaria">Sedentaria</option>
+        <option value="moderata">Moderata</option>
+        <option value="aerobica">Sport aerobici / Fitness</option>
+        <option value="anaerobica">Sport anaerobici</option>
+        <option value="bodybuilding">Bodybuilding</option>
+      </select>
+    </div>
+
+    <div class="rda-preview" id="rdaPreview">
+      <div class="rda-preview-row"><span>Peso ideale (BMI 21,5)</span><b id="pesoIdealeVal">—</b></div>
+      <div class="rda-preview-row"><span>RDA proteico giornaliero</span><b id="rdaProteineVal">—</b></div>
+    </div>
+
+    <div class="profilo-disclaimer">
+      ⚠️ Non è consiglio medico. Il peso ideale è una stima statistica (BMI 21,5), non un obiettivo prescrittivo per tutti i corpi. Se il tuo peso attuale è molto distante da questo valore, o hai condizioni mediche specifiche, parlane con un medico o nutrizionista prima di seguire rigidamente questo target.
+    </div>
+
+    <div class="modal-actions" style="margin-top:16px">
+      <button class="btn-secondary" onclick="closeProfiloModal()">Annulla</button>
+      <button class="btn-primary" onclick="saveProfilo()">Salva</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
+
 
 <script>
 function openHelp() { document.getElementById('helpOverlay').classList.add('open'); }
@@ -497,6 +610,151 @@ const ALIMENTI_BASE = [
 ];
 
 const DEFICIT_TARGET = 500;
+
+// SISTEMA TRE COLORI (Metodo Bilanciamo)
+// Giallo = Carboidrati (4 kcal/g) · Rosso = Proteine (4 kcal/g) · Verde = Grassi (9 kcal/g)
+// Eccezione "Paradosso dei legumi": nonostante l'apporto proteico, i legumi
+// restano Gialli perché la loro densità energetica glucidica è prevalente.
+const LEGUMI_KEYWORDS = ['cec','lenticch','fagiol','fava','fave','pisell','soia','edamame','borlott'];
+
+function isLegume(name) {
+  const n = (name || '').toLowerCase();
+  return LEGUMI_KEYWORDS.some(k => n.includes(k));
+}
+
+function getColore(prot, carb, fat, name) {
+  if (isLegume(name)) return 'giallo';
+  const kcalP = (prot || 0) * 4;
+  const kcalC = (carb || 0) * 4;
+  const kcalF = (fat  || 0) * 9;
+  if (kcalP === 0 && kcalC === 0 && kcalF === 0) return null; // nessun dato macro
+  if (kcalF >= kcalP && kcalF >= kcalC) return 'verde';
+  if (kcalC >= kcalP && kcalC >= kcalF) return 'giallo';
+  return 'rosso';
+}
+
+function coloreDotHtml(colore) {
+  if (!colore) return '';
+  return `<span class="colore-dot colore-${colore}"></span>`;
+}
+
+// PROFILO / PESO IDEALE / RDA PROTEICO (Metodo Bilanciamo)
+// Peso_Ideale = 21,5 * altezza(m)^2  ·  RDA_Proteine = Peso_Ideale * Fattore_Y
+const FATTORE_Y = {
+  sedentaria:   { min: 0.8, max: 1.0,  label: 'Sedentaria' },
+  moderata:     { min: 1.0, max: 1.3,  label: 'Moderata' },
+  aerobica:     { min: 1.3, max: 1.5,  label: 'Sport aerobici / Fitness' },
+  anaerobica:   { min: 1.5, max: 1.8,  label: 'Sport anaerobici' },
+  bodybuilding: { min: 2.0, max: 3.0,  label: 'Bodybuilding' },
+};
+
+function getProfilo() {
+  try { return JSON.parse(localStorage.getItem('calorie_profilo') || '{}'); }
+  catch(e) { return {}; }
+}
+function saveProfiloData(p) { localStorage.setItem('calorie_profilo', JSON.stringify(p)); }
+
+function calcPesoIdeale(altezzaCm) {
+  if (!altezzaCm || altezzaCm <= 0) return null;
+  const h = altezzaCm / 100;
+  return 21.5 * h * h;
+}
+
+function calcRdaRange(pesoIdeale, livello) {
+  const f = FATTORE_Y[livello];
+  if (!pesoIdeale || !f) return null;
+  return { min: pesoIdeale * f.min, max: pesoIdeale * f.max };
+}
+
+function openProfiloModal() {
+  const p = getProfilo();
+  document.getElementById('profiloAltezza').value = p.altezza || '';
+  document.getElementById('profiloAttivita').value = p.attivita || 'sedentaria';
+  updateRdaPreview();
+  document.getElementById('profiloOverlay').classList.add('open');
+}
+
+function closeProfiloModal(e) {
+  if (e && e.target !== document.getElementById('profiloOverlay')) return;
+  document.getElementById('profiloOverlay').classList.remove('open');
+}
+
+function updateRdaPreview() {
+  const altezza = parseFloat(document.getElementById('profiloAltezza').value);
+  const livello = document.getElementById('profiloAttivita').value;
+  const pesoIdeale = calcPesoIdeale(altezza);
+  const rda = calcRdaRange(pesoIdeale, livello);
+  document.getElementById('pesoIdealeVal').textContent = pesoIdeale ? `${pesoIdeale.toFixed(1)} kg` : '—';
+  document.getElementById('rdaProteineVal').textContent = rda ? `${Math.round(rda.min)}–${Math.round(rda.max)} g` : '—';
+}
+
+function saveProfilo() {
+  const altezza = parseFloat(document.getElementById('profiloAltezza').value);
+  const attivita = document.getElementById('profiloAttivita').value;
+  if (!altezza || altezza <= 0) { showToast('Inserisci un\'altezza valida'); return; }
+  saveProfiloData({ altezza, attivita });
+  document.getElementById('profiloOverlay').classList.remove('open');
+  showToast('Profilo salvato!');
+  const data = getDayData(currentDay);
+  renderDiario(data);
+}
+
+function rdaCheckHtml(totProt) {
+  const p = getProfilo();
+  if (!p.altezza || !p.attivita) {
+    return `<div class="rda-check">
+      <div class="rda-check-label">Target proteico (RDA)
+        <a onclick="openProfiloModal()">imposta profilo →</a>
+      </div>
+      <div class="rda-check-text" style="color:var(--text-dim)">Inserisci altezza e livello di attività per vedere il tuo target proteico giornaliero.</div>
+    </div>`;
+  }
+  const pesoIdeale = calcPesoIdeale(p.altezza);
+  const rda = calcRdaRange(pesoIdeale, p.attivita);
+  if (!rda) return '';
+  const pct = Math.min((totProt / rda.max) * 100, 100);
+  let cls = ''; // sotto il minimo = rosso (default)
+  if (totProt >= rda.min && totProt <= rda.max) cls = 'ok';
+  else if (totProt > rda.max) cls = 'over';
+  return `<div class="rda-check">
+    <div class="rda-check-label">Target proteico (RDA) su peso ideale
+      <a onclick="openProfiloModal()">modifica →</a>
+    </div>
+    <div class="rda-check-bar-bg"><div class="rda-check-bar-fill ${cls}" style="width:${pct}%"></div></div>
+    <div class="rda-check-text"><span>Oggi: <b>${totProt}g</b></span><span>Target: <b>${Math.round(rda.min)}–${Math.round(rda.max)}g</b></span></div>
+  </div>`;
+}
+
+// PIANIFICAZIONE WEEKEND (reverse planning) — "il corpo risponde alla somma settimanale"
+function getWeekendPlan() {
+  try { return JSON.parse(localStorage.getItem('calorie_weekend_plan') || '{}'); }
+  catch(e) { return {}; }
+}
+function saveWeekendPlan(p) { localStorage.setItem('calorie_weekend_plan', JSON.stringify(p)); }
+
+function initWeekendPlan() {
+  const saved = getWeekendPlan();
+  const data = getDayData(currentDay);
+  const garmin = data.garmin || 2152;
+  const targetGiorno = garmin - DEFICIT_TARGET;
+  const defaultSettimanale = saved.settimanale != null ? saved.settimanale : targetGiorno * 7;
+  document.getElementById('weekendSettimanale').value = defaultSettimanale;
+  document.getElementById('weekendStima').value = saved.stima != null ? saved.stima : '';
+  updateWeekendPlan();
+}
+
+function updateWeekendPlan() {
+  const settimanale = parseFloat(document.getElementById('weekendSettimanale').value) || 0;
+  const stima = parseFloat(document.getElementById('weekendStima').value) || 0;
+  saveWeekendPlan({ settimanale, stima });
+  const resultBox = document.getElementById('weekendResult');
+  const resultVal = document.getElementById('weekendResultVal');
+  if (!settimanale) { resultVal.textContent = '—'; resultBox.classList.remove('warn'); return; }
+  const feriali = (settimanale - stima) / 5;
+  resultVal.textContent = Math.round(feriali);
+  if (feriali < 1000) resultBox.classList.add('warn'); else resultBox.classList.remove('warn');
+}
+
 let currentDay = todayKey();
 let selectedAlimento = null;
 let editingDiarioIdx = null;
@@ -582,7 +840,7 @@ function updateBilancio(data) {
   bar.className = 'progress-bar-fill';
   const pct = Math.min((assunte / target) * 100, 100);
   bar.style.width = pct + '%';
-  if (rimanenti < 0) { document.getElementById('defLabel').textContent = 'Sforato'; defCard.classList.add('over'); bar.classList.add('over'); }
+  if (rimanenti < 0) { document.getElementById('defLabel').textContent = 'Da compensare'; defCard.classList.add('over'); bar.classList.add('over'); }
   else if (rimanenti < 200) { document.getElementById('defLabel').textContent = 'Quasi al limite'; defCard.classList.add('warn'); bar.classList.add('warn'); }
   else { document.getElementById('defLabel').textContent = 'Rimanenti'; }
 }
@@ -595,9 +853,10 @@ function renderAlimentiList(filter = '') {
   list.innerHTML = filtered.map(a => {
     const kcalP = Math.round(a.porzione / 100 * a.kcal100);
     const idx = all.indexOf(a);
+    const colore = getColore(a.protein, a.carbs, a.fat, a.name);
     return `<div class="alimento-item${a.custom?' custom-item':''}" onclick="openModal(${idx}, getAllAlimenti())">
       <div style="flex:1">
-        <div class="alimento-name">${a.name}${a.custom?'<span class="badge">mio</span>':''}</div>
+        <div class="alimento-name name-row">${coloreDotHtml(colore)}${a.name}${a.custom?'<span class="badge">mio</span>':''}</div>
         <div class="alimento-meta">porzione tipica: ${a.porzione}${a.unit}</div>
       </div>
       <div style="text-align:right">
@@ -623,17 +882,20 @@ function renderDiario(data) {
     list.innerHTML = `<div class="empty-state"><div class="empty-icon">🍽</div>Nessun alimento aggiunto oggi</div>`;
     return;
   }
-  const rows = data.pasti.map((p,i) => `
+  const rows = data.pasti.map((p,i) => {
+    const colore = getColore(p.prot, p.carb, p.fat, p.name);
+    return `
     <div class="diario-item">
       <div style="flex:1">
-        <div class="diario-name">${p.name}</div>
+        <div class="diario-name name-row">${coloreDotHtml(colore)}${p.name}</div>
         <div class="diario-porzione">${p.porzione}${p.unit}</div>
         ${macroHtml(p)}
       </div>
       <div class="diario-kcal">${Math.round(p.kcal)} kcal</div>
       <button class="diario-edit" onclick="editAlimento(${i})" title="Modifica porzione">✏️</button>
       <button class="diario-del" onclick="removeAlimento(${i})">✕</button>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 
   const totKcal = Math.round(data.pasti.reduce((s,p) => s+p.kcal, 0));
   const totProt = Math.round(data.pasti.reduce((s,p) => s+(p.prot||0), 0));
@@ -662,7 +924,31 @@ function renderDiario(data) {
     </div>
   </div>`;
 
-  list.innerHTML = rows + totalsRow;
+  list.innerHTML = rows + totalsRow + coloreBalanceHtml(totProt, totCarb, totFat) + rdaCheckHtml(totProt);
+}
+
+function coloreBalanceHtml(totProt, totCarb, totFat) {
+  const kcalRosso  = totProt * 4;
+  const kcalGiallo = totCarb * 4;
+  const kcalVerde  = totFat  * 9;
+  const totKcalMacro = kcalRosso + kcalGiallo + kcalVerde;
+  if (totKcalMacro === 0) return '';
+  const pctGiallo = Math.round(kcalGiallo / totKcalMacro * 100);
+  const pctRosso  = Math.round(kcalRosso  / totKcalMacro * 100);
+  const pctVerde  = 100 - pctGiallo - pctRosso;
+  return `<div class="colore-balance">
+    <div class="colore-balance-label">Bilancio dei colori — oggi</div>
+    <div class="colore-bar">
+      <div class="colore-bar-seg giallo" style="width:${pctGiallo}%"></div>
+      <div class="colore-bar-seg rosso" style="width:${pctRosso}%"></div>
+      <div class="colore-bar-seg verde" style="width:${pctVerde}%"></div>
+    </div>
+    <div class="colore-bar-legend">
+      <span><span class="colore-dot colore-giallo"></span>Giallo <b>${pctGiallo}%</b></span>
+      <span><span class="colore-dot colore-rosso"></span>Rosso <b>${pctRosso}%</b></span>
+      <span><span class="colore-dot colore-verde"></span>Verde <b>${pctVerde}%</b></span>
+    </div>
+  </div>`;
 }
 
 function renderCustomList() {
@@ -993,7 +1279,7 @@ function showTab(name, btn) {
   document.getElementById('tab-' + name).classList.add('active');
   if (btn) btn.classList.add('active');
   else document.getElementById('tab-btn-' + name).classList.add('active');
-  if (name === 'storico') renderStorico();
+  if (name === 'storico') { renderStorico(); initWeekendPlan(); }
   if (name === 'miei') renderCustomList();
   if (name === 'ricorrenti') renderRicorrenti();
 }
