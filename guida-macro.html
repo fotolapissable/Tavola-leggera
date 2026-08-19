@@ -15,6 +15,7 @@
     --text-dim: #9a8878;
     --green: #6db87a;
     --red: #d96a5a;
+    --yellow: #e8c56a;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -157,6 +158,35 @@
     font-size: 24px;
     margin-right: 8px;
   }
+  .colore-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+  .colore-giallo { background: var(--yellow); }
+  .colore-rosso { background: var(--red); }
+  .colore-verde { background: var(--green); }
+  .colore-row {
+    display: flex;
+    align-items: center;
+    background: var(--bg3);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+  }
+  .formula-box {
+    background: var(--bg3);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 12px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: var(--amber-light);
+    border-left: 4px solid var(--amber);
+  }
   .footer {
     background: var(--bg2);
     border-top: 1px solid var(--bg3);
@@ -194,7 +224,7 @@
 
 <header>
   <h1>🍽 TavolaLeggera</h1>
-  <p class="subtitle">Guida completa ai macronutrienti e target</p>
+  <p class="subtitle">Guida completa: macronutrienti, colori, peso ideale e pianificazione</p>
 </header>
 
 <div class="section">
@@ -205,6 +235,19 @@
     <li><span class="macro-icon">⚡</span><strong>Carboidrati (C)</strong> — energia principale per il cervello e i muscoli</li>
     <li><span class="macro-icon">🧈</span><strong>Grassi (G)</strong> — energia, assorbimento vitamine, ormoni</li>
   </ul>
+</div>
+
+<div class="section">
+  <h2>🎨 Il sistema dei tre colori</h2>
+  <p>TavolaLeggera classifica ogni alimento con un colore, in base a <strong>quale macronutriente fornisce più energia</strong> — non quale è presente in maggior quantità in grammi, ma quale pesa di più in calorie.</p>
+  <div class="colore-row"><span class="colore-dot colore-giallo"></span><strong>Giallo — Carboidrati</strong>&nbsp;— l'energia immediata (pasta, pane, riso, frutta, patate)</div>
+  <div class="colore-row"><span class="colore-dot colore-rosso"></span><strong>Rosso — Proteine</strong>&nbsp;— la struttura del corpo (carne, pesce, uova, latticini)</div>
+  <div class="colore-row"><span class="colore-dot colore-verde"></span><strong>Verde — Grassi</strong>&nbsp;— la riserva energetica (olio, frutta secca, formaggi stagionati)</div>
+  <p style="margin-top: 12px;">Il pallino colorato appare accanto a ogni alimento nella lista e nel Diario, così a colpo d'occhio vedi cosa domina nel tuo piatto.</p>
+  <div class="highlight">
+    <strong>Il "paradosso dei legumi":</strong> ceci, lenticchie, fagioli e piselli hanno molte proteine, ma restano <strong>Gialli</strong>. Il motivo: la loro densità energetica viene comunque per lo più dai carboidrati, non dalle proteine. Non è un errore dell'app — è una scelta del metodo.
+  </div>
+  <p style="margin-top: 12px; font-size: 13px; color: var(--text-dim);">In fondo al Diario trovi anche il <strong style="color: var(--text);">Bilancio dei colori</strong> — una barra che mostra come si distribuiscono le tue calorie di oggi tra i tre colori.</p>
 </div>
 
 <h2>Target di macro consigliati</h2>
@@ -268,6 +311,28 @@ Esempio (1.700 kcal): 28% Proteine = 120g | 48% Carbs = 204g | 24% Grassi = 45g
   <div class="example">
 Esempio (2.000 kcal): 28% Proteine = 140g | 48% Carbs = 240g | 24% Grassi = 53g
   </div>
+</div>
+
+<div class="section">
+  <h2>⚖️ Peso ideale e RDA proteico</h2>
+  <p>Le percentuali sopra sono linee guida generiche. Se in <strong>⚙️ Profilo</strong> inserisci altezza e livello di attività, TavolaLeggera calcola un target proteico più preciso, basato sul <strong>Metodo Bilanciamo</strong>.</p>
+  <div class="formula-box">
+Peso Ideale = 21,5 × altezza(m)²<br>
+RDA Proteine = Peso Ideale × Fattore Y
+  </div>
+  <p>Il <strong>Fattore Y</strong> dipende da quanto ti muovi:</p>
+  <table>
+    <tr><th>Livello di attività</th><th>Fattore Y (g/kg)</th></tr>
+    <tr><td>Sedentaria</td><td>0,8 – 1,0</td></tr>
+    <tr><td>Moderata</td><td>1,0 – 1,3</td></tr>
+    <tr><td>Sport aerobici / Fitness</td><td>1,3 – 1,5</td></tr>
+    <tr><td>Sport anaerobici</td><td>1,5 – 1,8</td></tr>
+    <tr><td>Bodybuilding</td><td>2,0 – 3,0</td></tr>
+  </table>
+  <div class="highlight">
+    <strong>Perché il peso ideale e non quello attuale?</strong> È una scelta del metodo: calcolare il fabbisogno sul peso a cui il corpo tende, non su quello di partenza, per spingere verso l'equilibrio naturale. Nel Diario trovi la barra <strong>"Target proteico (RDA)"</strong> che confronta quanto hai assunto oggi con questo target.
+  </div>
+  <p style="margin-top: 12px; font-size: 13px; color: var(--text-dim);">⚠️ Il peso ideale è una stima statistica, non un obiettivo prescrittivo per tutti i corpi. Se il tuo peso reale è molto distante da questo valore, o hai condizioni mediche specifiche, parlane con un medico o nutrizionista prima di seguirlo rigidamente.</p>
 </div>
 
 <div class="section">
@@ -336,6 +401,25 @@ TOTALI GIORNALIERI
   </div>
 </div>
 
+<div class="section">
+  <h2>📅 Pianifica il weekend (calcolo a ritroso)</h2>
+  <p>Il corpo non risponde al singolo giorno, ma alla <strong>somma della settimana</strong>. Nella tab <strong>Storico</strong> trovi uno strumento per gestire questo in anticipo, invece di rincorrerlo dopo.</p>
+  <p style="margin-top: 8px;">Come funziona:</p>
+  <ol>
+    <li>Inserisci il tuo <strong>fabbisogno settimanale</strong> (l'app lo precompila moltiplicando il target di oggi × 7)</li>
+    <li>Stimi quanto pensi di mangiare nel weekend (sabato + domenica, anche un valore "abbondante")</li>
+    <li>L'app calcola quante kcal/giorno ti restano nei 5 giorni feriali per rientrare nel totale</li>
+  </ol>
+  <div class="formula-box">
+Budget feriale = (Fabbisogno settimanale − Stima weekend) ÷ 5
+  </div>
+  <div class="example">
+Esempio: settimana 14.000 kcal, weekend stimato 5.000 kcal<br>
+→ (14.000 − 5.000) ÷ 5 = <strong>1.800 kcal/giorno</strong> nei giorni feriali
+  </div>
+  <p style="margin-top: 12px; font-size: 13px; color: var(--text-dim);">È uno strumento di riferimento, non sostituisce il target giornaliero reale calcolato su Garmin. Se il budget feriale scende sotto le 1.000 kcal, l'app te lo segnala in rosso — probabilmente la stima del weekend è troppo alta.</p>
+</div>
+
 <div class="disclaimer">
   <div class="disclaimer-title">⚠️ DISCLAIMER IMPORTANTE</div>
   <p><strong>Non è consiglio medico.</strong> Questi target sono linee guida generiche. Se hai condizioni mediche specifiche (diabete, colesterolo, malattie renali), consulta un medico o nutrizionista.</p>
@@ -373,6 +457,12 @@ TOTALI GIORNALIERI
 
   <h3>D: Trovo due cibi uguali con valori diversi. Quale uso?</h3>
   <p>R: Usa quello che più si avvicina al tuo cibo reale. L'app è uno strumento, non scienza esatta.</p>
+
+  <h3>D: Perché i legumi sono Gialli se hanno tante proteine?</h3>
+  <p>R: È il "paradosso dei legumi" del metodo: nonostante l'apporto proteico, la loro densità energetica resta prevalentemente glucidica, quindi restano nella categoria Carboidrati.</p>
+
+  <h3>D: Ho sforato oggi, l'app dice "Da compensare" invece di "Sforato". Perché?</h3>
+  <p>R: Il metodo non lavora sull'errore del singolo pasto, ma sulla settimana. Un giorno sopra target non è un fallimento — usa la pianificazione weekend per riequilibrare nei giorni successivi, o semplicemente muoviti un po' di più.</p>
 </div>
 
 <div class="footer">
