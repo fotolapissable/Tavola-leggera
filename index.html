@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ricettario Sicilia — fotolapissable</title>
+<meta name="description" content="Ricette siciliane con valori nutrizionali calcolati per porzione, esportabili verso TavolaLeggera.">
+<meta name="theme-color" content="#141210">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ricettario Sicilia">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NN6FP74TCW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NN6FP74TCW');
+</script>
+<style>
+  :root{
+    --bg:#141210;
+    --bg-raised:#1c1916;
+    --bg-card:#1f1c18;
+    --line:#2c2822;
+    --amber:#C8813A;
+    --amber-light:#E0A56A;
+    --text:#F2EDE6;
+    --text-dim:#A79A88;
+    --text-faint:#6E6357;
+    --serif: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --mono: "SF Mono",ui-monospace,"Cascadia Code",monospace;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg); color:var(--text); font-family:var(--sans); min-height:100vh; padding-bottom:3rem;}
+  .wrap{max-width:680px; margin:0 auto; padding:0 1.25rem;}
+
+  header{padding:2.5rem 1.25rem 1.25rem;}
+  header .mark{display:flex; align-items:center; gap:.6rem; font-family:var(--serif); font-size:1.05rem; color:var(--text-dim); margin-bottom:1.6rem;}
+  header .mark .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);}
+  h1{font-family:var(--serif); font-weight:400; font-size:2.05rem; line-height:1.15; margin:0 0 .35rem;}
+  h1 em{font-style:italic; color:var(--amber-light);}
+  .sub{color:var(--text-dim); font-size:.92rem; max-width:40ch; line-height:1.5;}
+
+  .searchbar{margin-top:1.5rem;}
+  .searchbar input{
+    width:100%; background:var(--bg-raised); border:1px solid var(--line); color:var(--text);
+    padding:.85rem 1rem; border-radius:12px; font-size:.95rem; font-family:var(--sans);
+  }
+  .searchbar input:focus{outline:none; border-color:var(--amber);}
+  .searchbar input::placeholder{color:var(--text-faint);}
+
+  .chips{display:flex; gap:.5rem; flex-wrap:wrap; margin-top:1rem;}
+  .chip{
+    background:var(--bg-raised); border:1px solid var(--line); color:var(--text-dim);
+    padding:.42rem .85rem; border-radius:999px; font-size:.78rem; cursor:pointer; user-select:none;
+  }
+  .chip.active{border-color:var(--amber); color:var(--amber-light); background:rgba(200,129,58,.1);}
+
+  .resultcount{margin-top:1.1rem; font-size:.78rem; color:var(--text-faint);}
+
+  .grid{margin-top:1rem; display:flex; flex-direction:column; gap:.7rem;}
+  .card{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:14px;
+    padding:1.1rem 1.2rem; cursor:pointer;
+  }
+  .card .row1{display:flex; align-items:baseline; justify-content:space-between; gap:.6rem;}
+  .card h3{font-family:var(--serif); font-weight:400; font-size:1.1rem; margin:0; color:var(--text);}
+  .card .cat{
+    font-size:.68rem; padding:.18rem .55rem; border-radius:6px; background:var(--bg-raised);
+    color:var(--amber-light); white-space:nowrap; flex-shrink:0; text-transform:uppercase; letter-spacing:.03em;
+  }
+  .card .meta{display:flex; gap:1rem; margin-top:.55rem; font-size:.8rem; color:var(--text-faint);}
+  .card .meta b{color:var(--text-dim); font-weight:500;}
+
+  /* Detail panel */
+  .overlay{position:fixed; inset:0; background:rgba(10,9,8,.75); z-index:30; display:none; align-items:flex-end; justify-content:center;}
+  .overlay.show{display:flex;}
+  .detail{
+    background:var(--bg); width:100%; max-width:680px; max-height:90vh; overflow-y:auto;
+    border-radius:20px 20px 0 0; border:1px solid var(--line); border-bottom:none;
+    padding:1.5rem 1.25rem 2.5rem;
+  }
+  .detail .closebar{display:flex; justify-content:flex-end; margin-bottom:.5rem;}
+  .detail .closebar button{
+    background:var(--bg-raised); border:1px solid var(--line); color:var(--text-dim);
+    width:32px; height:32px; border-radius:50%; font-size:1rem; cursor:pointer;
+  }
+  .detail h2{font-family:var(--serif); font-weight:400; font-size:1.6rem; margin:0 0 .2rem;}
+  .detail .catline{font-size:.75rem; color:var(--amber-light); text-transform:uppercase; letter-spacing:.03em; margin-bottom:1.3rem;}
+
+  .portions{
+    display:flex; align-items:center; gap:.8rem; background:var(--bg-raised); border:1px solid var(--line);
+    border-radius:12px; padding:.7rem 1rem; margin-bottom:1.3rem;
+  }
+  .portions button{
+    background:var(--bg-card); border:1px solid var(--line); color:var(--text); width:30px; height:30px;
+    border-radius:50%; font-size:1.1rem; cursor:pointer;
+  }
+  .portions .pcount{font-family:var(--serif); font-size:1.1rem; min-width:2.5rem; text-align:center;}
+  .portions .plabel{color:var(--text-faint); font-size:.8rem; margin-left:.3rem;}
+
+  .nutri{display:grid; grid-template-columns:repeat(4,1fr); gap:.5rem; margin-bottom:1.4rem;}
+  .nutri .nbox{background:var(--bg-raised); border:1px solid var(--line); border-radius:10px; padding:.65rem .3rem; text-align:center;}
+  .nutri .nval{font-family:var(--serif); font-size:1.15rem; color:var(--amber-light);}
+  .nutri .nlabel{font-size:.65rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:.03em; margin-top:.15rem;}
+
+  .field{margin-bottom:1.2rem;}
+  .field .flabel{font-size:.7rem; letter-spacing:.04em; color:var(--text-faint); margin-bottom:.5rem; text-transform:uppercase;}
+  .ing-list{list-style:none; margin:0; padding:0;}
+  .ing-list li{display:flex; justify-content:space-between; padding:.5rem 0; border-bottom:1px solid var(--line); font-size:.88rem;}
+  .ing-list li:last-child{border-bottom:none;}
+  .ing-list li .qty{font-family:var(--mono); color:var(--amber-light); font-size:.82rem;}
+
+  .steps{margin:0; padding-left:1.2rem; color:var(--text-dim); font-size:.88rem; line-height:1.7;}
+  .steps li{margin-bottom:.4rem;}
+
+  .actions{display:flex; gap:.6rem; margin-top:1.5rem;}
+  .actions button{
+    flex:1; background:var(--amber); color:#141210; border:none; border-radius:10px;
+    padding:.75rem .9rem; font-weight:600; font-size:.85rem; cursor:pointer; font-family:var(--sans);
+  }
+  .actions button.secondary{background:var(--bg-raised); color:var(--text-dim); border:1px solid var(--line);}
+
+  .disclaimer{font-size:.72rem; color:var(--text-faint); margin-top:1.2rem; line-height:1.5;}
+
+  footer{margin-top:2.5rem; padding-top:1.25rem; border-top:1px solid var(--line); font-size:.75rem; color:var(--text-faint); display:flex; justify-content:space-between;}
+
+  .install-toast{
+    position:fixed; left:1rem; right:1rem; bottom:1rem; background:var(--bg-raised); border:1px solid var(--amber);
+    border-radius:12px; padding:.9rem 1rem; display:flex; align-items:center; gap:.8rem; max-width:648px; margin:0 auto;
+    transform:translateY(120%); transition:transform .35s ease; z-index:20;
+  }
+  .install-toast.show{transform:translateY(0);}
+  .install-toast span{flex:1; font-size:.85rem; color:var(--text-dim);}
+  .install-toast button{background:var(--amber); color:#141210; border:none; border-radius:8px; padding:.5rem .9rem; font-weight:600; font-size:.82rem; cursor:pointer;}
+  .install-toast .dismiss{background:none; color:var(--text-faint); padding:.5rem;}
+
+  .toast{
+    position:fixed; left:50%; bottom:1.2rem; transform:translate(-50%, 120%); background:var(--amber-light); color:#141210;
+    padding:.65rem 1.1rem; border-radius:10px; font-size:.85rem; font-weight:600; transition:transform .3s ease; z-index:40;
+  }
+  .toast.show{transform:translate(-50%, 0);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mark"><span class="dot"></span> fotolapissable</div>
+    <h1>Cucina <em>siciliana</em>,<br>calcolata al grammo.</h1>
+    <div class="sub">14 ricette tradizionali, valori nutrizionali per porzione calcolati automaticamente — esportabili come pasto in TavolaLeggera.</div>
+
+    <div class="searchbar">
+      <input type="text" id="search" placeholder="Cerca: norma, caponata, cannoli…">
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="resultcount" id="resultcount"></div>
+  </header>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>
+    <span>Ricettario Sicilia v1.0</span>
+    <span>fotolapissable.it</span>
+  </footer>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="detail" id="detail"></div>
+</div>
+
+<div class="install-toast" id="installToast">
+  <span>Installa Ricettario Sicilia sulla schermata Home per usarlo anche offline in cucina.</span>
+  <button id="installBtn">Installa</button>
+  <button class="dismiss" id="dismissInstall">✕</button>
+</div>
+
+<div class="toast" id="toast">CSV copiato/scaricato</div>
+
+<script>
+/* ---------- Ingredient nutrition database (valori indicativi per 100g) ---------- */
+const ING = {
+  pasta_secca:        {l:"Pasta di semola", kcal:358, p:12.5, c:71,  f:1.5},
+  melanzane:          {l:"Melanzane",       kcal:25,  p:1,    c:6,   f:0.2},
+  sedano:             {l:"Sedano",          kcal:16,  p:0.8,  c:3,   f:0.1},
+  cipolla:            {l:"Cipolla",         kcal:40,  p:1.1,  c:9,   f:0.1},
+  pomodoro_pelati:    {l:"Pomodori pelati", kcal:20,  p:1,    c:3.5, f:0.2},
+  olive_verdi:        {l:"Olive verdi",     kcal:145, p:1,    c:4,   f:15},
+  capperi:            {l:"Capperi",         kcal:23,  p:2.4,  c:4.9, f:0.9},
+  olio_evo:           {l:"Olio extravergine", kcal:900, p:0,  c:0,   f:100},
+  zucchero:           {l:"Zucchero",        kcal:400, p:0,    c:100, f:0},
+  farina_ceci:        {l:"Farina di ceci",  kcal:387, p:22,   c:58,  f:6.7},
+  prezzemolo:         {l:"Prezzemolo",      kcal:36,  p:3,    c:6,   f:0.8},
+  arance:             {l:"Arance",          kcal:47,  p:0.9,  c:12,  f:0.1},
+  finocchi:           {l:"Finocchi",        kcal:31,  p:1.2,  c:7,   f:0.2},
+  ricotta:            {l:"Ricotta",         kcal:146, p:8.8,  c:3.5, f:10},
+  sarde_fresche:      {l:"Sarde fresche",   kcal:135, p:20,   c:0,   f:5.5},
+  finocchietto:       {l:"Finocchietto selvatico", kcal:31, p:2.4, c:7, f:0.4},
+  uvetta:             {l:"Uvetta",          kcal:300, p:3,    c:70,  f:0.5},
+  pinoli:             {l:"Pinoli",          kcal:673, p:14,   c:13,  f:61},
+  pangrattato:        {l:"Pangrattato",     kcal:395, p:13,   c:74,  f:5},
+  broccoli_sic:       {l:"Broccolo siciliano (cavolfiore verde)", kcal:34, p:3, c:4, f:0.4},
+  acciughe:           {l:"Acciughe",        kcal:131, p:20,   c:0,   f:5},
+  semola:             {l:"Semola / cous cous", kcal:360, p:12.7, c:72, f:1.1},
+  pesce_misto:        {l:"Pesce misto",     kcal:110, p:19,   c:0,   f:3},
+  mandorle:           {l:"Mandorle",        kcal:579, p:21,   c:22,  f:50},
+  pesce_spada:        {l:"Pesce spada",     kcal:121, p:20,   c:0,   f:4},
+  caciocavallo:       {l:"Caciocavallo",    kcal:380, p:25,   c:2,   f:30},
+  formaggio_grattugiato: {l:"Formaggio grattugiato", kcal:392, p:33, c:3.2, f:29},
+  riso:               {l:"Riso",            kcal:332, p:7,    c:77,  f:0.6},
+  carne_macinata:     {l:"Carne macinata",  kcal:250, p:20,   c:0,   f:18},
+  piselli:            {l:"Piselli",         kcal:81,  p:5,    c:14,  f:0.4},
+  uova:               {l:"Uova",            kcal:143, p:13,   c:1,   f:10},
+  burro:              {l:"Burro",           kcal:717, p:0.6,  c:0.5, f:81},
+  farina_00:          {l:"Farina 00",       kcal:340, p:10,   c:76,  f:1},
+  cioccolato_fondente:{l:"Cioccolato fondente", kcal:546, p:5, c:46,  f:31},
+  canditi:            {l:"Canditi",         kcal:300, p:0,    c:75,  f:0},
+  pan_di_spagna:       {l:"Pan di Spagna",   kcal:297, p:8,    c:56,  f:5},
+  pasta_reale:        {l:"Pasta reale (marzapane)", kcal:457, p:9, c:52, f:24},
+};
+
+/* ---------- Recipes ---------- */
+const RECIPES = [
+  { id:'caponata', cat:'contorno', name:"Caponata siciliana", portionsBase:4,
+    ingredients:[['melanzane',600],['sedano',150],['cipolla',150],['pomodoro_pelati',200],['olive_verdi',100],['capperi',30],['olio_evo',60],['zucchero',20]],
+    steps:["Tagliare le melanzane a cubetti e friggerle in olio abbondante fino a doratura.","Rosolare cipolla e sedano a pezzetti in olio, aggiungere i pomodori pelati e cuocere 10 minuti.","Unire olive e capperi, poi le melanzane fritte.","Sciogliere lo zucchero con un filo di aceto e aggiungere per l\u2019agrodolce.","Cuocere altri 5 minuti mescolando, servire fredda o a temperatura ambiente."]},
+  { id:'panelle', cat:'antipasto', name:"Panelle", portionsBase:4,
+    ingredients:[['farina_ceci',250],['olio_evo',50],['prezzemolo',10]],
+    steps:["Versare la farina di ceci a pioggia in acqua fredda, mescolando per evitare grumi.","Cuocere a fuoco medio mescolando continuamente per 20-30 minuti finch\u00e9 l\u2019impasto si stacca dalle pareti.","Aggiungere il prezzemolo tritato, stendere su un piano bagnato in uno strato sottile.","Far raffreddare, tagliare a rettangoli o triangoli.","Friggere in olio caldo fino a doratura, servire calde, tradizionalmente nel pane."]},
+  { id:'arance-finocchi', cat:'contorno', name:"Insalata di arance e finocchi", portionsBase:4,
+    ingredients:[['arance',400],['finocchi',300],['olive_verdi',60],['olio_evo',20]],
+    steps:["Affettare finemente arance sbucciate a vivo e finocchi.","Disporre a strati alternati in un piatto da portata.","Aggiungere olive verdi denocciolate.","Condire con olio extravergine, sale e, a piacere, un pizzico di peperoncino."]},
+  { id:'norma', cat:'primo', name:"Pasta alla Norma", portionsBase:4,
+    ingredients:[['pasta_secca',400],['melanzane',400],['pomodoro_pelati',400],['olio_evo',80],['ricotta',100]],
+    steps:["Tagliare le melanzane a cubetti, friggerle in olio abbondante fino a doratura, scolare su carta assorbente.","Preparare un sugo semplice con i pomodori pelati, olio e basilico, cuocere 15 minuti.","Unire le melanzane fritte al sugo.","Cuocere la pasta al dente, condire con il sugo.","Completare con ricotta salata grattugiata al momento di servire."]},
+  { id:'pasta-sarde', cat:'primo', name:"Pasta con le sarde", portionsBase:4,
+    ingredients:[['pasta_secca',400],['sarde_fresche',300],['finocchietto',200],['uvetta',40],['pinoli',30],['pangrattato',30],['olio_evo',50],['cipolla',80]],
+    steps:["Lessare il finocchietto selvatico in acqua salata, conservando l\u2019acqua di cottura.","Rosolare la cipolla in olio, aggiungere le sarde pulite e il finocchietto tritato.","Unire uvetta ammollata e pinoli, cuocere qualche minuto.","Cuocere la pasta nell\u2019acqua di cottura del finocchietto.","Condire con il sugo di sarde, completare con pangrattato tostato in olio."]},
+  { id:'broccoli-arriminati', cat:'primo', name:"Pasta con i broccoli arriminati", portionsBase:4,
+    ingredients:[['pasta_secca',400],['broccoli_sic',500],['acciughe',20],['uvetta',30],['pinoli',20],['cipolla',60],['olio_evo',50]],
+    steps:["Lessare il broccolo siciliano in acqua salata, conservando l\u2019acqua di cottura.","Rosolare la cipolla in olio, sciogliervi le acciughe.","Aggiungere il broccolo lessato spezzettato, uvetta e pinoli, insaporire con lo zafferano sciolto in poca acqua.","Cuocere la pasta nell\u2019acqua di cottura del broccolo.","Mantecare la pasta con il condimento, mescolando bene (da qui il nome \u2018arriminati\u2019, mescolati)."]},
+  { id:'couscous-trapanese', cat:'primo', name:"Cous cous di pesce alla trapanese", portionsBase:4,
+    ingredients:[['semola',320],['pesce_misto',600],['pomodoro_pelati',200],['cipolla',100],['olio_evo',40],['mandorle',20]],
+    steps:["Preparare un brodo di pesce con le teste e le lische, aromatizzato con pomodoro e cipolla.","Incocciare la semola con acqua e olio, cuocerla a vapore nella couscoussiera.","Sfilettare il pesce e cuocerlo brevemente nel brodo filtrato.","Servire la semola bagnata con il brodo caldo, il pesce a parte, completare con mandorle tostate tritate."]},
+  { id:'involtini-spada', cat:'secondo', name:"Involtini di pesce spada", portionsBase:4,
+    ingredients:[['pesce_spada',500],['pangrattato',100],['caciocavallo',60],['uvetta',20],['pinoli',20],['olio_evo',30],['pomodoro_pelati',100]],
+    steps:["Preparare il ripieno mescolando pangrattato, caciocavallo grattugiato, uvetta e pinoli con un filo di olio.","Stendere le fettine di pesce spada, farcirle e arrotolarle chiudendo con uno stecchino.","Infilzare gli involtini su spiedini alternandoli a foglie d\u2019alloro.","Cuocere in padella con olio e un poco di pomodoro, girando spesso, per 10-15 minuti."]},
+  { id:'beccafico', cat:'secondo', name:"Sarde a beccafico", portionsBase:4,
+    ingredients:[['sarde_fresche',600],['pangrattato',100],['uvetta',30],['pinoli',30],['arance',100],['olio_evo',40]],
+    steps:["Pulire e aprire le sarde a libro, eliminando la lisca centrale.","Preparare il ripieno con pangrattato tostato in olio, uvetta, pinoli e scorza d\u2019arancia grattugiata.","Farcire ogni sarda, arrotolarla e disporla in una teglia unta d\u2019olio.","Irrorare con succo d\u2019arancia e un filo d\u2019olio, infornare a 200\u00b0C per 15-20 minuti."]},
+  { id:'parmigiana', cat:'secondo', name:"Parmigiana di melanzane", portionsBase:4,
+    ingredients:[['melanzane',800],['pomodoro_pelati',400],['caciocavallo',250],['formaggio_grattugiato',50],['olio_evo',100]],
+    steps:["Tagliare le melanzane a fette, friggerle in olio abbondante fino a doratura, scolare su carta assorbente.","Preparare un sugo semplice con i pomodori pelati.","Comporre gli strati in una teglia: melanzane, sugo, caciocavallo a fette, ripetere fino a esaurimento.","Completare con formaggio grattugiato, infornare a 190\u00b0C per circa 30 minuti."]},
+  { id:'arancini', cat:'secondo', name:"Arancini al rag\u00f9", portionsBase:4,
+    ingredients:[['riso',400],['carne_macinata',200],['piselli',100],['pomodoro_pelati',200],['caciocavallo',150],['pangrattato',100],['uova',100],['olio_evo',60],['cipolla',50]],
+    steps:["Cuocere il riso in acqua salata, scolarlo asciutto e farlo raffreddare.","Preparare un rag\u00f9 con carne macinata, cipolla, pomodoro e piselli, cuocere 30 minuti.","Formare le palline di riso, farcirle con rag\u00f9 e un cubetto di caciocavallo.","Passarle in uovo sbattuto e pangrattato.","Friggere in olio abbondante fino a doratura uniforme."]},
+  { id:'cannoli', cat:'dolce', name:"Cannoli siciliani", portionsBase:4,
+    ingredients:[['farina_00',200],['burro',30],['zucchero',130],['ricotta',500],['cioccolato_fondente',40],['canditi',30],['olio_evo',20]],
+    steps:["Impastare farina, burro, un cucchiaio di zucchero e un poco di vino fino a ottenere un impasto liscio, far riposare 30 minuti.","Stendere sottile, tagliare dei dischi e avvolgerli sugli appositi cilindri metallici.","Friggere in olio caldo fino a doratura, sfilare e far raffreddare.","Setacciare la ricotta con lo zucchero rimanente, unire gocce di cioccolato e canditi a pezzetti.","Farcire i cannoli solo al momento di servire per mantenerli croccanti."]},
+  { id:'cassata', cat:'dolce', name:"Cassata siciliana", portionsBase:8,
+    ingredients:[['pan_di_spagna',300],['ricotta',500],['zucchero',150],['pasta_reale',200],['cioccolato_fondente',50],['canditi',100]],
+    steps:["Foderare uno stampo con fette di pan di Spagna e listarelle di pasta reale.","Setacciare la ricotta con lo zucchero, unire cioccolato a scaglie e canditi a pezzetti.","Versare il ripieno nello stampo, richiudere con altro pan di Spagna.","Far riposare in frigo alcune ore, sformare e decorare con glassa e canditi interi."]},
+  { id:'granita-mandorla', cat:'dolce', name:"Granita di mandorla", portionsBase:4,
+    ingredients:[['mandorle',150],['zucchero',100]],
+    steps:["Frullare le mandorle con acqua fino a ottenere un latte omogeneo, filtrare con un panno.","Aggiungere lo zucchero al latte di mandorla filtrato, mescolare fino a scioglierlo.","Versare in una vaschetta e riporre in freezer, mescolando con una forchetta ogni 30-40 minuti per rompere i cristalli.","Servire quando ha una consistenza granulosa, tradizionalmente con brioche col tuppo."]},
+];
+
+const CATS = [
+  {key:'all', label:'Tutte'},
+  {key:'antipasto', label:'Antipasti'},
+  {key:'contorno', label:'Contorni'},
+  {key:'primo', label:'Primi'},
+  {key:'secondo', label:'Secondi'},
+  {key:'dolce', label:'Dolci'},
+];
+
+let activeCat = 'all';
+let query = '';
+let currentPortions = {};
+
+function normalize(s){ return (s||'').toLowerCase(); }
+
+function totalGrams(recipe, portions){
+  const scale = portions / recipe.portionsBase;
+  return recipe.ingredients.reduce((s,[,g]) => s+g, 0) * scale;
+}
+
+function computeNutrition(recipe, portions){
+  let kcal=0, p=0, c=0, f=0;
+  recipe.ingredients.forEach(([key, grams]) => {
+    const item = ING[key];
+    const factor = grams/100;
+    kcal += item.kcal * factor;
+    p += item.p * factor;
+    c += item.c * factor;
+    f += item.f * factor;
+  });
+  const scale = portions / recipe.portionsBase;
+  return {
+    total:{kcal:kcal*scale, p:p*scale, c:c*scale, f:f*scale},
+    perPortion:{kcal:(kcal*scale)/portions, p:(p*scale)/portions, c:(c*scale)/portions, f:(f*scale)/portions}
+  };
+}
+
+function matches(item){
+  if (activeCat !== 'all' && item.cat !== activeCat) return false;
+  if (!query) return true;
+  const q = normalize(query);
+  return normalize(item.name).includes(q);
+}
+
+function renderChips(){
+  const el = document.getElementById('chips');
+  el.innerHTML = CATS.map(c => `<span class="chip ${activeCat===c.key?'active':''}" data-key="${c.key}">${c.label}</span>`).join('');
+  el.querySelectorAll('.chip').forEach(c => c.onclick = () => { activeCat = c.dataset.key; renderChips(); renderList(); });
+}
+
+function renderList(){
+  const filtered = RECIPES.filter(matches);
+  document.getElementById('resultcount').textContent = `${filtered.length} ricette`;
+  const grid = document.getElementById('grid');
+  if (filtered.length === 0){
+    grid.innerHTML = `<p style="color:var(--text-faint); font-size:.9rem; margin-top:1rem;">Nessuna ricetta trovata.</p>`;
+    return;
+  }
+  grid.innerHTML = filtered.map(r => {
+    const portions = currentPortions[r.id] || r.portionsBase;
+    const n = computeNutrition(r, portions);
+    return `
+      <div class="card" data-id="${r.id}">
+        <div class="row1">
+          <h3>${r.name}</h3>
+          <span class="cat">${CATS.find(c=>c.key===r.cat).label}</span>
+        </div>
+        <div class="meta">
+          <span><b>${Math.round(n.perPortion.kcal)}</b> kcal/porz.</span>
+          <span><b>${portions}</b> porzioni</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+  grid.querySelectorAll('.card').forEach(c => c.onclick = () => openDetail(c.dataset.id));
+}
+
+function openDetail(id){
+  const r = RECIPES.find(x => x.id === id);
+  if (!r) return;
+  if (!currentPortions[id]) currentPortions[id] = r.portionsBase;
+  renderDetail(r);
+  document.getElementById('overlay').classList.add('show');
+}
+
+function renderDetail(r){
+  const portions = currentPortions[r.id];
+  const n = computeNutrition(r, portions);
+  const detail = document.getElementById('detail');
+  detail.innerHTML = `
+    <div class="closebar"><button id="closeDetail">✕</button></div>
+    <h2>${r.name}</h2>
+    <div class="catline">${CATS.find(c=>c.key===r.cat).label}</div>
+
+    <div class="portions">
+      <button id="portMinus">−</button>
+      <span class="pcount">${portions}</span>
+      <button id="portPlus">+</button>
+      <span class="plabel">porzioni</span>
+    </div>
+
+    <div class="nutri">
+      <div class="nbox"><div class="nval">${Math.round(n.perPortion.kcal)}</div><div class="nlabel">kcal</div></div>
+      <div class="nbox"><div class="nval">${n.perPortion.p.toFixed(1)}</div><div class="nlabel">proteine g</div></div>
+      <div class="nbox"><div class="nval">${n.perPortion.c.toFixed(1)}</div><div class="nlabel">carbo g</div></div>
+      <div class="nbox"><div class="nval">${n.perPortion.f.toFixed(1)}</div><div class="nlabel">grassi g</div></div>
+    </div>
+
+    <div class="field">
+      <div class="flabel">Ingredienti (per ${portions} porzioni)</div>
+      <ul class="ing-list">
+        ${r.ingredients.map(([key,grams]) => {
+          const scaled = grams * (portions/r.portionsBase);
+          return `<li><span>${ING[key].l}</span><span class="qty">${Math.round(scaled)} g</span></li>`;
+        }).join('')}
+      </ul>
+    </div>
+
+    <div class="field">
+      <div class="flabel">Preparazione</div>
+      <ol class="steps">${r.steps.map(s => `<li>${s}</li>`).join('')}</ol>
+    </div>
+
+    <div class="actions">
+      <button id="addToTL">Aggiungi a TavolaLeggera</button>
+      <button class="secondary" id="exportCsv">Esporta CSV</button>
+    </div>
+    <div class="disclaimer">Valori nutrizionali indicativi, calcolati da tabelle di composizione standard degli ingredienti — non sostituiscono un\u2019analisi di laboratorio. "Aggiungi a TavolaLeggera" funziona solo se questa app è pubblicata sotto lo stesso dominio di TavolaLeggera (es. apps.fotolapissable.it): condividono così lo stesso localStorage del browser. Il CSV è un export generico di riferimento, non un import per TavolaLeggera — l\u2019app non ha una funzione di import CSV.</div>
+  `;
+
+  document.getElementById('closeDetail').onclick = closeDetail;
+  document.getElementById('portMinus').onclick = () => { if (currentPortions[r.id] > 1){ currentPortions[r.id]--; renderDetail(r); renderList(); } };
+  document.getElementById('portPlus').onclick = () => { currentPortions[r.id]++; renderDetail(r); renderList(); };
+  document.getElementById('addToTL').onclick = () => addToTavolaLeggera(r);
+  document.getElementById('exportCsv').onclick = () => exportCsv(r);
+}
+
+function closeDetail(){ document.getElementById('overlay').classList.remove('show'); }
+document.getElementById('overlay').onclick = (e) => { if (e.target.id === 'overlay') closeDetail(); };
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+/* ---------- Real integration with TavolaLeggera ----------
+   TavolaLeggera reads its "Miei alimenti" from localStorage key
+   "calorie_custom_alimenti", an array of objects shaped exactly:
+   { name, porzione, unit, kcal100, protein, carbs, fat }
+   where kcal100/protein/carbs/fat are per-100g values (see TavolaLeggera's
+   own addCustomAlimento()). localStorage is scoped per origin, not per path,
+   so this only works if both apps are published under the same domain
+   (e.g. apps.fotolapissable.it) — different subdomains or file:// will not share it. */
+function addToTavolaLeggera(r){
+  const portions = currentPortions[r.id];
+  const n = computeNutrition(r, portions);
+  const grams = totalGrams(r, portions);
+  if (!grams || grams <= 0) { showToast('Peso ricetta non calcolabile'); return; }
+
+  const entry = {
+    name: `${r.name} (Ricettario Sicilia)`,
+    porzione: Math.round(grams / portions),
+    unit: 'g',
+    kcal100: Math.round((n.total.kcal / grams) * 100 * 10) / 10,
+    protein: Math.round((n.total.p / grams) * 100 * 10) / 10,
+    carbs:   Math.round((n.total.c / grams) * 100 * 10) / 10,
+    fat:     Math.round((n.total.f / grams) * 100 * 10) / 10,
+  };
+
+  let list;
+  try {
+    list = JSON.parse(localStorage.getItem('calorie_custom_alimenti') || '[]');
+  } catch(e) {
+    list = [];
+  }
+
+  const existingIdx = list.findIndex(a => a.name === entry.name);
+  if (existingIdx >= 0) {
+    list[existingIdx] = entry;
+  } else {
+    list.push(entry);
+  }
+  list.sort((a,b) => a.name.localeCompare(b.name, 'it'));
+
+  try {
+    localStorage.setItem('calorie_custom_alimenti', JSON.stringify(list));
+    showToast(existingIdx >= 0 ? 'Aggiornato in TavolaLeggera' : 'Aggiunto ai "Miei alimenti" di TavolaLeggera');
+  } catch(e) {
+    showToast('Impossibile scrivere — controlla di essere sullo stesso dominio');
+  }
+}
+
+function exportCsv(r){
+  const portions = currentPortions[r.id];
+  const n = computeNutrition(r, portions);
+  const today = new Date().toISOString().slice(0,10);
+  const header = "Data,Ricetta,Porzioni,Kcal_per_porzione,Proteine_g,Carboidrati_g,Grassi_g";
+  const row = [today, r.name, portions, Math.round(n.perPortion.kcal), n.perPortion.p.toFixed(1), n.perPortion.c.toFixed(1), n.perPortion.f.toFixed(1)].join(",");
+  const csv = header + "\n" + row;
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${r.id}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('CSV scaricato');
+}
+
+document.getElementById('search').addEventListener('input', (e) => { query = e.target.value; renderList(); });
+
+renderChips();
+renderList();
+
+/* ---------- PWA install + service worker ---------- */
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('installToast').classList.add('show');
+});
+document.getElementById('installBtn').onclick = async () => {
+  document.getElementById('installToast').classList.remove('show');
+  if (deferredPrompt){ deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; }
+};
+document.getElementById('dismissInstall').onclick = () => {
+  document.getElementById('installToast').classList.remove('show');
+};
+
+if ('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
+}
+</script>
+</body>
+</html>
