@@ -1,7 +1,7 @@
 {
-  "name": "Ricettario Sicilia — fotolapissable",
-  "short_name": "Ricettario Sicilia",
-  "description": "Ricette siciliane tradizionali con valori nutrizionali per porzione, esportabili verso TavolaLeggera.",
+  "name": "TavolaLeggera — fotolapissable",
+  "short_name": "TavolaLeggera",
+  "description": "Diario alimentare e conteggio calorico con database di cibi siciliani, grafici del deficit settimanale ed esportazione CSV.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
